@@ -22,3 +22,10 @@ https://deepmind.com/learning-resources/-introduction-reinforcement-learning-dav
 
 Finally, the real bible!
 
+## Some places to go
+
+[OpenAI Gym environment](https://gym.openai.com/envs/#classic_control)
+
+[Stable Baselines](https://stable-baselines.readthedocs.io/en/master/index.html) is a set of improved implementations of Reinforcement Learning (RL) algorithms based on OpenAI Baselines. You can find good papers here!
+
+[RLlib](https://docs.ray.io/en/master/tune/key-concepts.html) is an open-source library for reinforcement learning.
