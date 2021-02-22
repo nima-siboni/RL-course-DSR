@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+def return_pointwise_A(i, j, sim):
+    A = np.array([[0, 0]])
+
+    # agent i going to the right and left
+    if (0 <= i and i <= 7):
+        A = np.append(A, np.array([[1, 0]]), axis = 0)
+    if (1 <= i and i <= 8):
+        A = np.append(A, np.array([[-1, 0]]), axis = 0)
+
+    # agent i going to the right and left
+    if (0 <= j and j <= 7):
+        A = np.append(A, np.array([[0, 1]]), axis = 0)
+    if (1 <= j and j <= 8):
+        A = np.append(A, np.array([[0, -1]]), axis = 0)
+
+    # simultaneous movement of agents
+    if (sim == True):
+        if (0<=i and i<=7 and 0<=j and j<=7):
+            A = np.append(A, np.array([[1, 1]]), axis = 0) 
+        if (1<=i and i<=8 and 1<=j and j<=8):
+            A = np.append(A, np.array([[-1, -1]]), axis = 0) 
+        if (1<=i and i<=8 and 0<=j and j<=7):
+            A = np.append(A, np.array([[-1, 1]]), axis = 0) 
+        if (0<=i and i<=7 and 1<=j and j<=8):
+            A = np.append(A, np.array([[1, -1]]), axis = 0) 
+    
+    if (i == 2):
+        A = np.append(A, np.array([[7, 0]]), axis = 0)
+    if (i == 9):
+        A = np.append(A, np.array([[-7, 0]]), axis = 0)
+    if (j == 2):
+        A = np.append(A, np.array([[0, 7]]), axis = 0)
+    if (j == 9):
+        A = np.append(A, np.array([[0, -7]]), axis = 0)
+        
+    return A

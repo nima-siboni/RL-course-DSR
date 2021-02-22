@@ -1,0 +1,12 @@
+import numpy as np
+
+n = 10 #grid size along each direction
+
+# all the possible actions; not all of these actions can be assigned to every s
+# staying there, right, left, up, down
+A = [np.array([0, 0]), np.array([1, 0]), np.array([-1, 0]), np.array([0, 1]), np.array([0, -1])]
+
+
+# Policy $\pi$
+pi = np.random.random_integers(low=0, high=5, size=(n, n))
+

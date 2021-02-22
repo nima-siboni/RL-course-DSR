@@ -1,0 +1,6 @@
+gym==0.17.2
+keras
+numpy
+random2
+tensorflow==2.2.0
+tqdm
