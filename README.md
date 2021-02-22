@@ -13,10 +13,12 @@ Almost nothing!
 The presentation of the course can be found [here](https://docs.google.com/presentation/d/1_REcZjt23UiGeazb8a7_g39gUx-7P_riRnj-WMRWAzU/edit?usp=sharing).
 
 ## Some references:
-The [old testament bible](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf)
+The [old testament bible](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf), God him/her/theirselves.
 
-[Deep Reinforcement Learning](http://rail.eecs.berkeley.edu/deeprlcourse/), Sergey Levine
-
+[Deep Reinforcement Learning](http://rail.eecs.berkeley.edu/deeprlcourse/), Sergey Levine.
 
 [Introduction to Reinforcement Learning](
-https://deepmind.com/learning-resources/-introduction-reinforcement-learning-david-silver), David Silver
+https://deepmind.com/learning-resources/-introduction-reinforcement-learning-david-silver), David Silver.
+
+Finally, the real bible!
+
