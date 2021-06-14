@@ -20,7 +20,7 @@ The [old testament bible](https://web.stanford.edu/class/psych209/Readings/Sutto
 [Introduction to Reinforcement Learning](
 https://deepmind.com/learning-resources/-introduction-reinforcement-learning-david-silver), David Silver.
 
-[Reinforcement Learning Virtual School 2021](https://rl-vs.github.io/rlvs2021/)
+[Reinforcement Learning Virtual School](https://rl-vs.github.io/rlvs2021/), 2021.
 
 Finally, the real bible!
 
