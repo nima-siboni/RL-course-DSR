@@ -3,13 +3,13 @@ from matplotlib import interactive
 import numpy as np
 from tqdm import tqdm
 from plot_utils import create_plot, plotter
-from RL_utils import return_a_random_policy
-from RL_utils import step
-from RL_utils import choose_an_action_based_on_pi
-from RL_utils import return_epsilon_greedy_pi
-from RL_utils import initialize_the_state
-from RL_utils import Bellmann_iteration
-from RL_utils import learn_Q
+from rl_utils import return_a_random_policy
+from rl_utils import step
+from rl_utils import choose_an_action_based_on_pi
+from rl_utils import return_epsilon_greedy_pi
+from rl_utils import initialize_the_state
+from rl_utils import Bellmann_iteration
+from rl_utils import learn_Q
 
 # 1. Initialization
 
