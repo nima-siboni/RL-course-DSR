@@ -1,4 +1,3 @@
-import copy
 import matplotlib.pyplot as plt
 from matplotlib import interactive
 import numpy as np
@@ -16,14 +15,13 @@ np.random.seed(0)
 # 1.2 grid size along each direction
 N = 8
 
+
+env = Maze(N=N, wall_length=2)
+
 # 1.2 policy $\pi$
 # initializing policy to a random policy
 # initializing V to zero
-env = Maze(N=N, wall_length=2)
-
-import pdb; pdb.set_trace()
-
-pi = return_a_random_policy(N, env.action_space.n, epsilon=0.2)
+pi = return_a_random_policy(N, env.action_space.n, epsilon=1000000)
 
 V_accumulate = np.zeros((N, N))
 
@@ -46,14 +44,14 @@ for episode_id in tqdm(range(nr_episodes)):
         terminated = False
         env.reset(init_state)
         tmp_V = 0.0
+        step_counter = 0
         while not terminated:
             action_id = choose_an_action_based_on_pi(env.state, pi)
             new_state, reward, terminated, info = env.step(action_id)
-
-            tmp_V += np.power(gamma, counter) * reward
-
+            tmp_V += np.power(gamma, step_counter) * reward
+            step_counter += 1
         i, j = init_state
 
         V_accumulate[i, j] += tmp_V
 
-    plotter(ax, V_accumulate / (episode_id +1.))
+    plotter(ax, V_accumulate / (episode_id + 1.), vmax=0, vmin=-10)
