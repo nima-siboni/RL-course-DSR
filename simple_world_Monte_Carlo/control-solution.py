@@ -24,7 +24,7 @@ from utils import dstack_product
 ## 2.1 a sweep over all the states in the system.
 ### 2.1.1 for each state, restart the episode
 ### 2.1.2 run the simulation (following pi) and collect all the rewards
-#______________________________________
+#____________________________________
 
 # 3. Policy Improvement
 ## 3.1 let's first find out the best action for each point
@@ -89,12 +89,12 @@ for ctrl_episode_id in range(nr_ctrl_episodes):
                 terminated = True
 
             tmp_V = 0.0
-
+            step_counter = 0
             while not terminated:
                 action_id = choose_an_action_based_on_pi(env.state, pi)
                 new_state, reward, terminated, info = env.step(action_id)
-                tmp_V += np.power(gamma, counter) * reward
-
+                tmp_V += np.power(gamma, step_counter) * reward
+                step_counter += 1
             i, j = init_state
             V_accumulate[i, j] += tmp_V
 
