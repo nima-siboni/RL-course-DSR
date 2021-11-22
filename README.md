@@ -2,14 +2,21 @@
 Here are the exercises for the first/second session of our RL course.
 
 ## Requirements
+Create a virtual environment, with python or conda, e.g. 
+```buildoutcfg
+conda create -n rl python=3.8
+```
+Then, update your pip!
+```buildoutcfg
+pip install --upgrade pip
+```
+Now you can install the required packages which are listed in ```requirements.txt```, for example 
+by
+```buildoutcfg
+pip install -r requirements.txt
+```
 
-Almost nothing!
-
-- python3
-- numpy
-- matplotlib
-- tqdm
-
+## Presentation
 The presentation of the course can be found [here](https://docs.google.com/presentation/d/1_REcZjt23UiGeazb8a7_g39gUx-7P_riRnj-WMRWAzU/edit?usp=sharing).
 
 ## Some references
