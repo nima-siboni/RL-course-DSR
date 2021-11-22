@@ -3,3 +3,4 @@ matplotlib
 tqdm
 gym
 tensorflow
+ray
