@@ -15,7 +15,7 @@ from utils import dstack_product
 ## 1.2  setting the geometry
 ## 1.3 create the environment
 ## 1.4 create a random policy
-## 1.5 some important paramters
+## 1.5 some important parameters
 ## 1.6 setting up the plot
 ## 1.7 create an array for all states
 #_____________________________________
@@ -56,7 +56,7 @@ pi = return_a_random_policy(N, nr_actions, epsilon=epsilon)
 epsilon = 0.2
 epsilon_decay_window = 10.
 
-# 1.5 some important paramters
+# 1.5 some important parameters
 
 gamma = 0.98
 nr_eval_episodes = 50
@@ -84,8 +84,14 @@ for ctrl_episode_id in range(nr_ctrl_episodes):
         # 2.1 a sweep over all the states in the system.
         for counter, init_state in enumerate(all_states):
 
+            # TODO
             # 2.1.1 for each state, restart the episode
+
+            #TODO
             # 2.1.2 run the simulation (following pi) and collect all the rewards
+
+    #TODO
+    # save the values in an array named V
 
     # plot the current values
     plotter(ax, V, vmax=0, vmin=-4. * N, env=env)
@@ -100,10 +106,10 @@ for ctrl_episode_id in range(nr_ctrl_episodes):
 
     for counter, init_state in enumerate(all_states):
 
+        #TODO:
         # 3.1.1 calculate the Qs
         Q = np.zeros(nr_actions)
-        # Here some code is missing
-        
+
         # 3.1.2 finding the best Q
         Q_max = np.max(Q)
 

@@ -1,17 +1,19 @@
 import numpy as np
 import tensorflow as tf
 
-def return_a_random_policy(n, nr_actions, epsilon=0.1):
-    '''
-    this function returns a random policy
 
-    keywords:
-    n -- size of the grid is n x n
-    nr_actions --- number of actions from each state
+def return_a_random_policy(n: int, nr_actions: int, epsilon: float = 0.1):
+    """
+    this function returns a random policy.
 
-    returns:
-    a random policy in one hot coded format
-    '''
+    Args:
+        n: size of the grid is n x n
+        nr_actions: number of actions from each state
+        epsilon: the epsilon in epsilon greedy
+
+    Returns:
+        a random policy in one hot coded format
+    """
     actions = np.random.randint(low=0, high=nr_actions, size=(n, n))
 
     pi = tf.keras.utils.to_categorical(actions, num_classes=nr_actions)
@@ -29,17 +31,18 @@ def return_a_random_policy(n, nr_actions, epsilon=0.1):
 
     return pi
 
-def choose_an_action_based_on_pi(state, pi):
-    '''
-    chooses an action from the input state
 
-    keywords:
+def choose_an_action_based_on_pi(state: np.ndarray, pi: np.ndarray) -> int:
+    """
+    Chooses an action from the input state.
 
-    state -- the state for which the action should be chosen
-    the shape of the state is (1,2)
-
-    pi -- the policy
-    '''
+    Args:
+        state: the state for which the action should be chosen
+        the shape of the state is (1,2)
+        pi: the policy
+    Returns:
+        an integer for the action.
+    """
     nx, ny = state
     nx = int(nx)
     ny = int(ny)

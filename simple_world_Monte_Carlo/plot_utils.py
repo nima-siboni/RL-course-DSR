@@ -2,7 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import dstack_product
 
-def create_plot(n):
+
+def create_plot(n: int):
+    """
+    Creates a plot
+    """
     figure = plt.figure(figsize=(6, 6))
     ax = figure.add_subplot()
     ax.set_autoscaley_on(True)
@@ -13,7 +17,7 @@ def create_plot(n):
 
 def plotter(ax, v, vmax=0, vmin=-20, env=None):
     plt.cla()
-    #ax.axis('off')
+    # ax.axis('off')
     ax.set_autoscaley_on(True)
 
     if env is not None:
@@ -28,6 +32,7 @@ def plotter(ax, v, vmax=0, vmin=-20, env=None):
     plt.draw()
     plt.show()
     plt.pause(0.1)
+
 
 def plot_simulation(env, choose_action, pi, plt):
     N = env.N
@@ -66,6 +71,7 @@ def plot_the_policy(plt, pi, env):
                 vy = 0
 
             plt.arrow(y, x, vy, vx, head_width=0.1, color='black', alpha=0.5)
+
 
 def plotter_policy(ax, pi):
     plt.cla()
