@@ -5,6 +5,7 @@ Here are the exercises for the first/second session of our RL course.
 Create a virtual environment, with python or conda, e.g. 
 ```buildoutcfg
 conda create -n rl python=3.8
+conda activate rl
 ```
 Then, update your pip!
 ```buildoutcfg
