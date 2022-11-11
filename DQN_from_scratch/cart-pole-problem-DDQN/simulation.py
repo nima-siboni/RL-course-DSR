@@ -19,7 +19,8 @@ nr_actions = env.action_space.n
 agent_ler = agent_learner(nr_features=nr_features, nr_actions=nr_actions, gamma=0.999, stddev=0.2, learning_rate=0.0005)
 
 # loading the agent
-agent_ler.Q_t = tf.keras.models.load_model('./training-results/Q-target/trained-agents/last-agent')
+agent_ler.Q_t = tf.keras.models.load_model(
+    'training-results/Q-target/trained-agents/last-agent')
 
 # set the Q to Q_t
 agent_ler.update_Q_to_Q_t()
