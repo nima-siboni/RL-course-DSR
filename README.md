@@ -11,7 +11,8 @@ Then, update your pip!
 ```buildoutcfg
 pip install --upgrade pip
 ```
-Now you can install the required packages which are listed in ```requirements.txt```, for example 
+Clone the repository and get into RL-course-DSR. Now you can install the required 
+packages which are listed in ```requirements.txt```, for example 
 by
 ```buildoutcfg
 pip install -r requirements.txt
