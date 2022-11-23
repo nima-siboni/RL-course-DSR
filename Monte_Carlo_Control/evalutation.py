@@ -4,7 +4,7 @@ import numpy as np
 from tqdm import tqdm
 from environment.maze import Maze
 from rl_utils import return_a_random_policy, choose_an_action_based_on_pi
-from plot_utils import create_plot, plotter
+from plot_utils import create_plot, plot_values
 from utils import dstack_product
 
 # 1. Initialization
@@ -54,4 +54,4 @@ for episode_id in tqdm(range(nr_episodes)):
 
         V_accumulate[i, j] += tmp_V
 
-    plotter(ax, V_accumulate / (episode_id + 1.), vmax=0, vmin=-10)
+    plot_values(ax, V_accumulate / (episode_id + 1.), vmax=0, vmin=-10)

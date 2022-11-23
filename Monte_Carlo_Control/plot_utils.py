@@ -15,11 +15,10 @@ def create_plot(n: int):
     return ax
 
 
-def plotter(ax, v, vmax=0, vmin=-20, env=None):
+def plot_values(ax, v, vmax=0, vmin=-20, env=None):
     plt.cla()
     # ax.axis('off')
     ax.set_autoscaley_on(True)
-
     if env is not None:
         N = env.N
         all_states = dstack_product(np.arange(N), np.arange(N))
@@ -34,7 +33,7 @@ def plotter(ax, v, vmax=0, vmin=-20, env=None):
     plt.pause(0.1)
 
 
-def plot_simulation(env, choose_action, pi, plt):
+def animate_an_episode(env, choose_action, pi, plt):
     N = env.N
     env.reset(np.array([N - 1, 0]))
     terminated = False

@@ -4,33 +4,19 @@ from matplotlib import interactive
 import numpy as np
 import tensorflow as tf
 from tqdm import tqdm
+
+from Q_learning.utils import dstack_product
 from environment.maze import Maze
-from rl_utils import return_a_random_policy, choose_an_action_based_on_pi
-from plot_utils import create_plot, plotter, plot_simulation, plot_the_policy
-from utils import dstack_product
+from rl_utils import return_a_random_policy, choose_an_action_based_on_pi, \
+    evaluate_a_policy, greedy_action_based_on_Q, convert_best_action_ids_to_policy, \
+    greedy_to_epsilon_greedy, calculate_Qs_for_this_state
+from plot_utils import create_plot, plot_values, animate_an_episode, plot_the_policy
 
 # The code structure:
 # 1. Initialization
-## 1.1 inputs and the random seed
-## 1.2  setting the geometry
-## 1.3 create the environment
-## 1.4 create a random policy
-## 1.5 some important paramters
-## 1.6 setting up the plot
-## 1.7 create an array for all states
-#_____________________________________
-
-# 2. Evaluate the current policy
-## 2.1 a sweep over all the states in the system.
-### 2.1.1 for each state, restart the episode
-### 2.1.2 run the simulation (following pi) and collect all the rewards
-#____________________________________
-
-# 3. Policy Improvement
-## 3.1 let's first find out the best action for each point
-### 3.1.1 calculate the Qs
-## 3.2 convert the found best actions to a soft but greedy policy
-#______________________________________
+# A loop where at each iteration has:
+# 2. Policy evaluation, followed by
+# 3. Policy improvement
 
 # 1. Initialization
 
@@ -67,88 +53,41 @@ interactive(True)
 plt.cla()
 ax.axis('off')
 
-
+# 1.7 Auxilary variables
 all_states = dstack_product(np.arange(N), np.arange(N))
-
 
 for ctrl_episode_id in range(nr_ctrl_episodes):
 
     # 2. lets first evaluate the current policy
-    V_accumulate = np.zeros((N, N))
-
-    for eval_episode_id in tqdm(range(nr_eval_episodes), "evaluation " + str(ctrl_episode_id) + '/' + str(nr_ctrl_episodes)):
-
-        # a sweep over all the states in the system.
-        for counter, init_state in enumerate(all_states):
-
-            terminated = False
-
-            env.reset(init_state)
-
-            if np.array_equal(init_state, env.goal_state):
-                terminated = True
-
-            tmp_V = 0.0
-            step_counter = 0
-            while not terminated:
-                action_id = choose_an_action_based_on_pi(env.state, pi)
-                new_state, reward, terminated, info = env.step(action_id)
-                tmp_V += np.power(gamma, step_counter) * reward
-                step_counter += 1
-            i, j = init_state
-            V_accumulate[i, j] += tmp_V
-
-    V = V_accumulate / (nr_eval_episodes)
-
-    del V_accumulate
+    V = evaluate_a_policy(pi, env, nr_eval_episodes, gamma)
 
     # plot the current values
 
-    plotter(ax, V, vmax=0, vmin=-4. * N, env=env)
+    plot_values(ax, V, vmax=0, vmin=-4. * N, env=env)
     plot_the_policy(plt, pi, env)
-    plot_simulation(env, choose_an_action_based_on_pi, pi, plt)
+    animate_an_episode(env, choose_an_action_based_on_pi, pi, plt)
 
     # 3. Policy Improvement
 
     # 3.1 let's first find out the best action for each point
 
-    best_actions = np.zeros((N, N), dtype=int)
+    best_action_ids = np.zeros((N, N), dtype=int)
 
-    for counter, init_state in enumerate(all_states):
+    for counter, state in enumerate(all_states):
 
         # 3.1.1 calculate the Qs
-        Q = np.zeros(nr_actions)
-
-        for action_id in range(nr_actions):
-            env.reset(init_state)
-            state, reward, _, _ = env.step(action_id)
-            i, j = state
-            Q[action_id] = reward + gamma * V[i, j]
-
+        Q = calculate_Qs_for_this_state(env=env, state=state, V=V, gamma=gamma,
+                                        nr_actions=nr_actions)
         # 3.1.2 finding the best Q
-        Q_max = np.max(Q)
+        greedy_action_id = greedy_action_based_on_Q(Q)
 
-        # finding the action ids of actions with Q equal to Q_max
-        all_action_ids_with_Q_max = []
-        for action_id in range(nr_actions):
-            if (Q[action_id] == Q_max):
-                all_action_ids_with_Q_max.append(action_id)
-
-        greedy_action_id = np.random.choice(np.array(all_action_ids_with_Q_max))
-
-        i, j = init_state
-        best_actions[i, j] = greedy_action_id
+        i, j = state
+        best_action_ids[i, j] = greedy_action_id
 
     # 2.2 convert the found best actions to a soft but greedy policy
     old_pi = copy.deepcopy(pi)
+    pi = convert_best_action_ids_to_policy(best_action_ids=best_action_ids,
+                                           nr_actions=nr_actions)
 
-    pi = tf.keras.utils.to_categorical(best_actions, num_classes=nr_actions)
-
-    pi = pi + epsilon * np.exp(-1. * ctrl_episode_id / epsilon_decay_window)
-
-    normalization_factor = np.sum(pi, axis=-1)
-
-    normalization_factor = np.expand_dims(normalization_factor, -1)
-    assert np.shape(normalization_factor) == (N, N, 1)
-
-    pi = pi / normalization_factor
+    current_epsilon = epsilon * np.exp(-1. * ctrl_episode_id / epsilon_decay_window)
+    pi = greedy_to_epsilon_greedy(pi_greedy=pi, current_epsilon=current_epsilon)
