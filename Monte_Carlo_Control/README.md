@@ -1,20 +1,23 @@
-# The code structure:
-# 1. Initialization
-##  1.1 inputs and the random seed
-## 1.2  setting the geometry
-## 1.3 create the environment
-## 1.4 create a random policy
-## 1.5 some important paramters
-## 1.6 setting up the plot
-## 1.7 create an array for all states
+# Monte Carlo Control
+In this exercise you work on Monte-Carlo control.
 
+The core of this approach is composed of many repetitions of the following steps:
+* Evaluating the current scenario, and
+* Improving it
 
-# 2. Evaluate the current policy
-## 2.1 a sweep over all the states in the system.
-### 2.1.1 for each state, restart the episode
-### 2.1.2 run the simulation (following pi) and collect all the rewards
+In more details the approach is as follows
+```python
+Create a initial policy
 
-# 3. Policy Improvement
-## 3.1 let's first find out the best action for each point
-### 3.1.1 calculate the Qs
-## 3.2 convert the found best actions to a soft but greedy policy
+for _ in nr_training_rounds:
+    
+    V <-- Evaluate the policy for all the points
+
+    for each state:
+        Calculate the Q values using V
+        Find the greedy action from the Q values
+
+    Update the epsilon
+    Using the greedy actions find the epsilon soft policy
+    update the policy to the new epsilon policy
+```
