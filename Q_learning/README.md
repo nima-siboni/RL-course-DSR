@@ -27,10 +27,11 @@ for _ in training_rounds:
 ```
 
 ## Exercise 1
-Write a function that updates the Q values.
+Write a function that updates the Q values based on the materials discussed during 
+the course. There are hints for you in the comments of experience_and_learn.py
 
 ## Exercise 2
-At the beginning of the training for loop you create a new policy from the newly 
+At the beginning of the training for loop a new policy is created from the newly 
 updated Q values. What do you think would happen if you do not update the policy? 
 Let's say instead of updating the policy, you update the policy EVERYTIME to a 
 different 
