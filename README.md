@@ -35,8 +35,18 @@ Finally, the real bible!
 
 ## Some places to go
 
-[OpenAI Gym environments](https://gym.openai.com/envs/#classic_control) a collection of RL Hello worlds environments. 
+### Environments
+* [OpenAI Gym environments](https://gym.openai.com/envs/#classic_control) a collection of RL Hello worlds environments. 
+* [A short list of interesting environments](https://medium.com/@mauriciofadelargerich/reinforcement-learning-environments-cff767bc241f)
+* [A more exhaustive list of environments](https://github.com/clvrai/awesome-rl-envs)
+* [InstaDeep's Jumanji](https://instadeepai.github.io/jumanji/)
 
-[Stable Baselines](https://stable-baselines.readthedocs.io/en/master/index.html) is a set of improved implementations of Reinforcement Learning (RL) algorithms based on OpenAI Baselines. You can find good papers here!
+### RL framework
 
-[RLlib](https://docs.ray.io/en/master/tune/key-concepts.html) is an open-source library for reinforcement learning.
+* [Stable Baselines](https://stable-baselines.readthedocs.io/en/master/index.html) is 
+a set of improved implementations of Reinforcement Learning (RL) algorithms based on OpenAI Baselines. You can find good papers here!
+
+* [RLlib](https://docs.ray.io/en/master/tune/key-concepts.html) is an open-source 
+library for reinforcement learning.
+
+* [InstaDeep's Mava](https://github.com/instadeepai/Mava)
