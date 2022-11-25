@@ -49,18 +49,22 @@ def choose_an_action_based_on_pi(state, pi):
 
     return chosen_action
 
-def learn_Q(state, action_id, reward, new_state, Q, gamma, alpha):
-    '''
+
+def learn_Q(state, action_id, reward, new_state, Q, gamma, alpha, terminated):
+    """
     updates the Q tabel using one s,a,r,s'
-    '''
+    """
     i, j = state.astype(int)
     iprime, jprime = new_state.astype(int)
 
-    correction_term = reward + gamma * np.max(Q[iprime, jprime, :]) - Q[i, j, action_id]
+    if not terminated:
+        correction_term = reward + gamma * np.max(Q[iprime, jprime, :]) - Q[i, j, action_id]
 
-    Q[i, j, action_id] = Q[i, j, action_id] + alpha * correction_term
-
+        Q[i, j, action_id] = Q[i, j, action_id] + alpha * correction_term
+    else:
+        Q[i, j, action_id] = reward
     return Q
+
 
 def return_epsilon_greedy_pi(Q, epsilon):
     '''

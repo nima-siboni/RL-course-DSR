@@ -43,7 +43,7 @@ epsilon_0 = 10.
 pi = return_a_random_policy(N, nr_actions, epsilon=epsilon_0)
 epsilon_0 = 1.0
 
-epsilon_decay_window = 200.
+epsilon_decay_window = 100.
 
 # 1.6 setting up the plot
 ax = create_plot(N)
@@ -52,9 +52,7 @@ interactive(True)
 plt.cla()
 ax.axis('off')
 
-gamma = 0.98
-
-Q = np.zeros((N, N, nr_actions))
+Q = np.random.random((N, N, nr_actions))
 
 for learning_episode_id in tqdm(range(nr_learing_episodes), 'learning episode'):
     terminated = False
@@ -62,13 +60,14 @@ for learning_episode_id in tqdm(range(nr_learing_episodes), 'learning episode'):
     if np.array_equal(env.state, env.goal_state):
         terminated = True
     epsilon = epsilon_0 * np.exp(-1. * learning_episode_id / epsilon_decay_window)
+    pi = return_epsilon_greedy_pi(Q, epsilon)
     while not terminated:
-        # pi = return_epsilon_greedy_pi(Q, epsilon)
         state = copy.deepcopy(env.state)
-        pi = return_epsilon_greedy_pi(Q, epsilon)
         action_id = choose_an_action_based_on_pi(env.state, pi)
         state_prime, reward, terminated, info = env.step(action_id)
-        learn_Q(state, action_id, reward, state_prime, Q, gamma, alpha)
+        # TODO: create a function which updates the Q values
+        # Q = learn_Q(state, action_id, reward, state_prime, Q, gamma, alpha,
+        # terminated)
 
     V = np.sum(Q * pi, axis=-1)
     plotter(ax, V, vmax=0, vmin=-2. * N, env=env)

@@ -98,4 +98,11 @@ for ctrl_episode_id in range(nr_ctrl_episodes):
                                            nr_actions=nr_actions)
 
     current_epsilon = epsilon * np.exp(-1. * ctrl_episode_id / epsilon_decay_window)
+    # TODO:
+    #  Bonus Exercise. This function does not return an standard epslon greedy.
+    #  Modify it to the standard approach
+    #
+    # TODO:
+    #  Super Bonus Exercise. implement a better approach to go from Q values to
+    #  soft greedy.
     pi = greedy_to_epsilon_greedy(pi_greedy=pi, current_epsilon=current_epsilon)
