@@ -151,20 +151,20 @@ class Maze(gym.Env):
             if np.array_equal(obsv, self.goal_state):
                 # if we are the goal
                 reward = 0
-                done = True
+                terminated = True
                 self.state = obsv
             else:
                 # if we are not at the goal
                 reward = -1
-                done = False
+                terminated = False
                 self.state = obsv
         else:
             # when it hitting a wall or an obstacle
             reward = -1
-            done = False
+            terminated = False
             # dont do anything for the state; it remains where it was
-
-        return self.state, reward, done, {}
+        truncated = False
+        return self.state, reward, terminated, truncated, {}
 
     def render(self, mode='human'):
         '''
