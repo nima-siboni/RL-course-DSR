@@ -18,11 +18,11 @@ cumulative_reward = 0
 while not done:
     a = np.random.randint(nr_actions)
     # 2.2. and pass it to the environment
-    s, r, terminated, truncated, info = env.step(action=a)
+    s, r, done, info = env.step(action=a)
     # 2.3. How much reward did you get for that action? Keep the score!
     cumulative_reward += r
     # 2.4. Repeat the 2.{1,2,3} until the end of the episode
-    done = terminated or truncated
+
 # 2.5. How much total reward you got? What does it mean to have large/small reward?
 print("total reward:", cumulative_reward)
 

@@ -1,6 +1,4 @@
 from collections import deque
-from copy import deepcopy
-
 import numpy as np
 import os
 from random import sample
@@ -143,12 +141,11 @@ def initial_filling_of_buffer(rounds_data_exploration, agent, main_buffer, env, 
         state, terminated, steps = initializer(initial_state)
         state = single_shape_adaptor(state, nr_features)
 
-        done = deepcopy(terminated)
-        while not done:
+        while not terminated:
 
             action_id = agent.action_based_on_Q_target(state, env, epsilon)
 
-            new_state, reward, terminated, truncated, info = env.step(action_id)
+            new_state, reward, terminated, info = env.step(action_id)
 
             new_state = single_shape_adaptor(new_state, nr_features)
 
@@ -158,8 +155,6 @@ def initial_filling_of_buffer(rounds_data_exploration, agent, main_buffer, env, 
             main_buffer.consider_this_event(this_event)
 
             state, steps = update_state_step(new_state, steps)
-
-            done = terminated or truncated
 
         if verbose:
             print("...    the terminal_state is reached after " + str(steps) + " with last reward of " + str(reward))
@@ -194,17 +189,14 @@ def testing_performance(agent, nr_steps_test, env, details=False):
         state_t, terminated_t, steps_t = initializer(initial_state_t)
         state_t = single_shape_adaptor(state_t, nr_features)
         performance = 0
-        done_t = deepcopy(terminated_t)
-        while not done_t:
+        while not terminated_t:
             action_id_t = agent.action_based_on_Q_target(state_t, env, epsilon=0.0)
-            new_state_t, reward_t, terminated_t, truncated_t, info_t = env.step(
-                action_id_t)
+            new_state_t, reward_t, terminated_t, info_t = env.step(action_id_t)
             new_state_t = single_shape_adaptor(new_state_t, nr_features)
             state_t, steps_t = update_state_step(new_state_t, steps_t)
             performance += reward_t
             if test_id == 0:
                 env.render()
-            done_t = terminated_t or truncated_t
         nr_steps_lst[test_id] = steps_t
         rewards_lst[test_id] = reward_t
         sum_performance += performance
