@@ -3,7 +3,7 @@ pygame
 numpy
 matplotlib
 tqdm
-gymnasium
+gym
 tensorflow
 ray[rllib]
 ray[default]      
