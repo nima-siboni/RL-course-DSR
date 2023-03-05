@@ -2,9 +2,9 @@ import copy
 from typing import List, Tuple
 
 import numpy as np
-import gym
-from gym import spaces
-from gym.utils import seeding
+import gymnasium as gym
+from gymnasium import spaces
+from gymnasium.utils import seeding
 
 
 class Maze(gym.Env):
@@ -140,7 +140,7 @@ class Maze(gym.Env):
         Returns:
             a tuple of:
             state: the new state
-            done: True if the process is terminated. The process is terminated if the agent hits the wall, or reaches the goal
+            terminated: True if the process is terminated. The process is terminated if the agent hits the wall, or reaches the goal
             reward: the reward is -1 for an accepted step and large value (-2 * self.N) for hitting the wall, and 0 for reaching the goal.
             info: forget about it!
         """
@@ -163,20 +163,20 @@ class Maze(gym.Env):
             if np.array_equal(obsv, self.goal_state):
                 # if we are the goal
                 reward = 0
-                done = True
+                terminated = True
                 self.state = obsv
             else:
                 # if we are not at the goal
                 reward = -1
-                done = False
+                terminated = False
                 self.state = obsv
         else:
             # when it hitting a wall or an obstacle
             reward = -1
-            done = False
+            terminated = False
             # dont do anything for the state; it remains where it was
-
-        return self.state, reward, done, {}
+        truncated = False
+        return self.state, reward, terminated, truncated, {}
 
     def render(self, mode='human'):
         '''

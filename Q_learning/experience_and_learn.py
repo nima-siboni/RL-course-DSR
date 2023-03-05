@@ -6,10 +6,10 @@ import tensorflow as tf
 from tqdm import tqdm
 from environment.maze import Maze
 
-from rl_utils import return_a_random_policy, choose_an_action_based_on_pi, learn_Q, return_epsilon_greedy_pi
+from rl_utils import return_a_random_policy, choose_an_action_based_on_pi, learn_Q, \
+    return_epsilon_greedy_pi
 
 from plot_utils import create_plot, plotter, plot_simulation, plot_the_policy
-
 
 # 1. Initialization
 
@@ -19,7 +19,6 @@ np.random.seed(0)
 # 1.2 the geometry of the world
 N = 7
 wall_length = 3
-
 
 # 1.3 creating the environment
 env = Maze(N=N,
@@ -64,10 +63,10 @@ for learning_episode_id in tqdm(range(nr_learing_episodes), 'learning episode'):
     while not terminated:
         state = copy.deepcopy(env.state)
         action_id = choose_an_action_based_on_pi(env.state, pi)
-        state_prime, reward, terminated, info = env.step(action_id)
+        state_prime, reward, terminated, truncated, info = env.step(action_id)
         # TODO: create a function which updates the Q values
-        # Q = learn_Q(state, action_id, reward, state_prime, Q, gamma, alpha,
-        # terminated)
+        Q = learn_Q(state, action_id, reward, state_prime, Q, gamma, alpha,
+                    terminated)
 
     V = np.sum(Q * pi, axis=-1)
     plotter(ax, V, vmax=0, vmin=-2. * N, env=env)

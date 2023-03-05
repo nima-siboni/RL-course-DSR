@@ -61,15 +61,15 @@ for u in range(U):
 
         initial_state = env.reset()
 
-        state, terminated, steps = initializer(initial_state)
+        state, done, steps = initializer(initial_state)
 
         state = single_shape_adaptor(state, nr_features)
 
-        while not terminated:
+        while not done:
 
             action_id = agent_ler.action_based_on_Q_target(state, env, epsilon=epsilon)
 
-            new_state, reward, terminated, info = env.step(action_id)
+            new_state, reward, terminated, truncated, info = env.step(action_id)
 
             new_state = single_shape_adaptor(new_state, nr_features)
 
@@ -78,6 +78,8 @@ for u in range(U):
             replay_buffer.consider_this_event(this_event)
 
             state, steps = update_state_step(new_state, steps)
+
+            done = terminated or truncated
 
         print("...          " + str(steps) + " new event are added to the replay_buffer")
 
