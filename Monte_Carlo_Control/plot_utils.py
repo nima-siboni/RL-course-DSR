@@ -40,7 +40,7 @@ def animate_an_episode(env, choose_action, pi, plt):
     while not terminated:
         action_id = choose_action(env.state, pi)
         old_state = env.state
-        new_state, reward, terminated, info = env.step(action_id)
+        new_state, reward, terminated, truncated, info = env.step(action_id)
         if np.array_equal(old_state, new_state):
             plt.scatter(old_state[1], old_state[0], c='red', s=120)
         else:

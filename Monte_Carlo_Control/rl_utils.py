@@ -65,17 +65,18 @@ def evaluate_a_policy(pi, env, nr_eval_episodes, gamma):
 
         # a sweep over all the states in the system.
         for counter, init_state in enumerate(all_states):
-            terminated = False
+            done = False
             env.reset(init_state)
             if np.array_equal(init_state, env.goal_state):
-                terminated = True
+                done = True
             tmp_V = 0.0
             step_counter = 0
-            while not terminated:
+            while not done:
                 action_id = choose_an_action_based_on_pi(env.state, pi)
-                new_state, reward, terminated, info = env.step(action_id)
+                new_state, reward, terminated, truncated, info = env.step(action_id)
                 tmp_V += np.power(gamma, step_counter) * reward
                 step_counter += 1
+                done = terminated or truncated
             i, j = init_state
             V_accumulate[i, j] += tmp_V
 
@@ -127,7 +128,7 @@ def calculate_Qs_for_this_state(env, V, gamma, nr_actions, state):
     Q = np.zeros(nr_actions)
     for action_id in range(nr_actions):
         env.reset(state)
-        state, reward, _, _ = env.step(action_id)
+        state, reward, _, _, _ = env.step(action_id)
         i, j = state
         Q[action_id] = reward + gamma * V[i, j]
     return Q
