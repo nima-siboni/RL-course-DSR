@@ -5,11 +5,12 @@
 # 2.1 - Get the default config of xxx from xxx.DEFAULT_CONFIG.copy()
 # 2.2 - Examine the config and modify it if needed, e.g. change the "num_gpus" to 0,
 # and the learning_rate to 0.001
-import time
 import gymnasium as gym
+from your_1st_agents.plot_util import visualize_env
 
 # 0 - Choose an algorithm from ray.rllib.algorithms
 from ray.rllib.algorithms.dqn import DQNConfig
+
 
 # 1- Configure the blah algorithm
 # 1.1. get the default config for you algorithm
@@ -34,21 +35,25 @@ for _ in range(nr_trainings):
 # 5 - Visualize the trained agent; This is similar to running the random_agent,
 # except that this time we have a trained agent
 # 5.1 - Create an environment similar to the training env.
-env = gym.make("CartPole-v1", render_mode="human")
+env = gym.make("CartPole-v1", render_mode="rgb_array")
 s, _ = env.reset()
 done = False
 cumulative_reward = 0
+
 while not done:
     # 5.2. Let the agent choose an action;
     a = agent.compute_single_action(observation=s, explore=False)
     # 5.3. and pass it to the environment
     s, r, terminated, truncated, info = env.step(action=a)
+
     # 5.4. How much reward did you get for that action? Keep the score!
     cumulative_reward += r
     done = terminated or truncated
     # 5.5. Repeat the 5.{2,3, 4} until the end of the episode
     # visualize the agent
-    time.sleep(0.1)
+    visualize_env(env=env, pause_sec=0.1)
+    # continue with the next step without closing the plot
+
 # 5.6. How much total reward you got? What does it mean to have large/small reward?
 print("Total reward:", cumulative_reward)
 
