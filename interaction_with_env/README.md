@@ -8,8 +8,8 @@ The goal of this practice is to:
 
 ## 0 - Create an environment
 ```python
-import gym
-env = gym.make("CartPole-v1")
+import gymnasium as gym
+env = gym.make("CartPole-v1", render_mode="rgb_array")
 ```
 ## 1 - Let's examine the env
 ### 1.1 - Check the observation space of the agent

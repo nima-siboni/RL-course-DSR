@@ -1,6 +1,6 @@
-import gym
+import gymnasium as gym
 # Create an environment
-env = gym.make("CartPole-v1")
+env = gym.make("CartPole-v1", render_mode="rgb_array")
 
 # 0 - Reset the environment
 
