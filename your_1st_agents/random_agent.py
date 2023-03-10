@@ -2,8 +2,8 @@
 # successful is the random agent, i.e. how much reward it accumulates.
 
 # 0 - Create an env
-import gym
-env = gym.make("CartPole-v1")
+import gymnasium as gym
+env = gym.make("CartPole-v1", render_mode="rgb_array")
 
 # 1 - Reset the env.
 

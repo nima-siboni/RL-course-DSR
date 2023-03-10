@@ -1,7 +1,7 @@
 # Here you create an env and let an agent interact with it. You can measure how
 # successful is the random agent, i.e. how much reward it accumulates.
 import numpy as np
-import gym
+import gymnasium as gym
 
 # 0 - Create an env
 
