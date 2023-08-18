@@ -2,7 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import dstack_product
 
-def create_plot(n):
+
+def create_plot(n: int):
+    """
+    Creates a plot
+    """
     figure = plt.figure(figsize=(6, 6))
     ax = figure.add_subplot()
     ax.set_autoscaley_on(True)
@@ -11,11 +15,10 @@ def create_plot(n):
     return ax
 
 
-def plotter(ax, v, vmax=0, vmin=-20, env=None):
+def plot_values(ax, v, vmax=0, vmin=-20, env=None):
     plt.cla()
-    #ax.axis('off')
+    # ax.axis('off')
     ax.set_autoscaley_on(True)
-
     if env is not None:
         N = env.N
         all_states = dstack_product(np.arange(N), np.arange(N))
@@ -29,14 +32,15 @@ def plotter(ax, v, vmax=0, vmin=-20, env=None):
     plt.show()
     plt.pause(0.1)
 
-def plot_simulation(env, choose_action, pi, plt):
+
+def animate_an_episode(env, choose_action, pi, plt):
     N = env.N
     env.reset(np.array([N - 1, 0]))
     terminated = False
     while not terminated:
         action_id = choose_action(env.state, pi)
         old_state = env.state
-        new_state, reward, terminated, info = env.step(action_id)
+        new_state, reward, terminated, truncated, info = env.step(action_id)
         if np.array_equal(old_state, new_state):
             plt.scatter(old_state[1], old_state[0], c='red', s=120)
         else:
@@ -66,6 +70,7 @@ def plot_the_policy(plt, pi, env):
                 vy = 0
 
             plt.arrow(y, x, vy, vx, head_width=0.1, color='black', alpha=0.5)
+
 
 def plotter_policy(ax, pi):
     plt.cla()

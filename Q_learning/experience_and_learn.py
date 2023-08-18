@@ -9,7 +9,7 @@ from environment.maze import Maze
 from rl_utils import return_a_random_policy, choose_an_action_based_on_pi, learn_Q, \
     return_epsilon_greedy_pi
 
-from plot_utils import create_plot, plotter, plot_simulation, plot_the_policy
+from plot_utils import create_plot, plot_values, animate_an_episode, plot_the_policy
 
 # 1. Initialization
 
@@ -42,7 +42,7 @@ epsilon_0 = 10.
 pi = return_a_random_policy(N, nr_actions, epsilon=epsilon_0)
 epsilon_0 = 1.0
 
-epsilon_decay_window = 100.
+epsilon_decay_window = 200.
 
 # 1.6 setting up the plot
 ax = create_plot(N)
@@ -69,7 +69,7 @@ for learning_episode_id in tqdm(range(nr_learing_episodes), 'learning episode'):
                     terminated)
 
     V = np.sum(Q * pi, axis=-1)
-    plotter(ax, V, vmax=0, vmin=-2. * N, env=env)
+    plot_values(ax, V, vmax=0, vmin=-2. * N, env=env)
     plot_the_policy(plt, pi, env)
     if (learning_episode_id % 50 == 49):
-        plot_simulation(env, choose_an_action_based_on_pi, pi, plt)
+        animate_an_episode(env, choose_an_action_based_on_pi, pi, plt)
