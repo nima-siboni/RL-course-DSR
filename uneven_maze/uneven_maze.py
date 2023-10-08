@@ -3,9 +3,9 @@ Uneven_maze: This is a RL environment compatible with Gymnasium which represents
 maze) which is
 not flat. As a consequence the cost of taking one step depends on whether it is uphill or
 downhill. The agent is rewarded for reaching the goal and penalized for taking steps.
-The cost of the  steps is a weighted sum of a constant step cost and the heigth difference
+The cost of the  steps is a weighted sum of a constant step cost and the height difference
 between the start and end of the step. The weight is a parameter of the environment.
-The heigth in of the map is represented by a function of x, y coordinates. The function is
+The height in of the map is represented by a function of x, y coordinates. The function is
 specified as a parameter of the environment.
 """
 import copy
@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # The parameters of the environment are:
-# - the size of the map (width and heigth)
-# - the function which represents the heigth of the map
+# - the size of the map (width and height)
+# - the function which represents the height of the map
 # - the max and min of the cost associated with taking a step; commonly a random value in this
 # range is chosen
 # - the max and min of the cost associated with going uphill for a unit displacement; commonly a
@@ -27,22 +27,22 @@ import numpy as np
 # - the goal position of the agent
 
 
-# Define the heigth function
+# Define the height function
 def sample_terrain_function(
     x_position: int, y_position: int, height: int, width: int, mountain_height: float
 ) -> float:
     """
-    The heigth function is such that along the y axis it is a parabola with maximum at the
+    The height function is such that along the y-axis it is a parabola with maximum at the
     center and zeros at the beginning and end of the domain. This parabola is reduced by a
-    linear function along the x axis. This is to represent a mountain range which is higher
+    linear function along the x-axis. This is to represent a mountain range which is higher
     close to left edge of the map and lower close to the right edge of the map.
     :param x_position: the x coordinate
     :param y_position: the y coordinate
-    :param height: the heigth of the map
+    :param height: the height of the map
     :param width: the width of the map
-    :param mountain_height: the maximum heigth of the mountain
+    :param mountain_height: the maximum height of the mountain
 
-    :return: the heigth of the map at the given coordinates
+    :return: the height of the map at the given coordinates
 
     """
     # Define the y of the highest point of the mountain
@@ -58,7 +58,7 @@ class UnevenMaze(gym.Env):
     Description:
         A maze with an uneven surface. The agent is rewarded for reaching the goal and penalized
         for taking steps. The cost of the steps is a weighted sum of a constant step cost and the
-        heigth difference between the start and end of the step. The weight is a parameter of
+        height difference between the start and end of the step. The weight is a parameter of
         the environment.
     """
 
@@ -184,7 +184,7 @@ class UnevenMaze(gym.Env):
         else:
             raise ValueError("Invalid action.")
 
-        # if the agent goes out of bounds of heigth or width, it stays in the same position
+        # if the agent goes out of bounds of height or width, it stays in the same position
         if next_position[0] < 0 or next_position[0] >= self.height:
             next_position[0] = self.current_position[0]
         if next_position[1] < 0 or next_position[1] >= self.width:
@@ -208,7 +208,7 @@ class UnevenMaze(gym.Env):
         # Get the height difference
         height_difference = current_height - last_height
 
-        # Only reward negatively for increasing heigth
+        # Only reward negatively for increasing height
         height_difference = height_difference if height_difference > 0 else 0.0
 
         # Get the reward
@@ -221,9 +221,8 @@ class UnevenMaze(gym.Env):
         Set the last ond current positions. The last_position is set to the current_position and
         the current_position is set to the value given as the input parameter.
 
-        :param position: the value for the current position. If None is given the
-        current_position is set to a random value (within the maze), and the last_position is set to
-         None.
+        :param position: the value for the current position. If None is given this function sets
+        current_position to a random value (within the maze), and last_position to None.
         """
         # Set the position
         # random position is generated if the position is not given
@@ -257,7 +256,7 @@ class UnevenMaze(gym.Env):
         - The agent is represented by a blue circle.
         - The goal is represented by a green circle.
         - The start is represented by a red circle.
-        - The heigth of the terrain is represented by a color gradient of gray.
+        - The height of the terrain is represented by a color gradient of gray.
         """
         # Define the figure
         if not self._fig:
@@ -268,12 +267,12 @@ class UnevenMaze(gym.Env):
         # Define the x and y coordinates
         altitudes = np.zeros(shape=(self.height + 1, self.width + 1))
 
-        # Define the heigth
+        # Define the height
         for i in range(self.height + 1):
             for j in range(self.width + 1):
                 altitudes[i, j] = self._get_altitude([i, j])
 
-        # Plot the heigth
+        # Plot the height
         self._ax.imshow(altitudes)
 
         # Plot the start
@@ -305,7 +304,7 @@ class UnevenMaze(gym.Env):
     def _get_altitude(self, position) -> float:
         """
         Get the altitude from the position
-        :return: the heigth
+        :return: the height
         """
         altitude = self._terrain_function(
             position[0], position[1], self.height, self.width, self.mountain_height
@@ -337,7 +336,7 @@ class UnevenMaze(gym.Env):
 
     @property
     def cost_height(self) -> float:
-        """Return the cost of heigth difference"""
+        """Return the cost of height difference"""
         return self._cost_height
 
     @property
