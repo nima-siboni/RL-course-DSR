@@ -64,6 +64,7 @@ class UnevenMaze(gym.Env):
 
     def __init__(self, config: Dict[str, Any]):
         # Define the parameters of the environment
+        self._last_positions = []
         self._config = config
         self.width: int = config["width"]
         self.height: int = config["height"]
@@ -149,6 +150,7 @@ class UnevenMaze(gym.Env):
         if self._fig:
             self._fig = None
             self._ax = None
+        self._last_positions = []
         return observation, info_reset
 
     def _get_next_position(self, action) -> np.ndarray:
@@ -233,6 +235,7 @@ class UnevenMaze(gym.Env):
             self._current_position = [x_position, y_position]
         else:
             self._last_position = self.current_position
+            self._last_positions.append(self._last_position)
             self._current_position = position
 
     def _get_observation(self) -> np.ndarray:
@@ -250,7 +253,7 @@ class UnevenMaze(gym.Env):
 
         return observation
 
-    def render(self) -> None:
+    def render(self, colors: Optional[np.ndarray] = None) -> None:
         """
         Rendering the environment as follows:
         - The agent is represented by a blue circle.
@@ -264,16 +267,17 @@ class UnevenMaze(gym.Env):
         if not self._ax:
             self._ax = self._fig.add_subplot(111)
 
-        # Define the x and y coordinates
-        altitudes = np.zeros(shape=(self.height + 1, self.width + 1))
+        if colors is None:
+            # Define the x and y coordinates
+            altitudes = np.zeros(shape=(self.height + 1, self.width + 1))
 
-        # Define the height
-        for i in range(self.height + 1):
-            for j in range(self.width + 1):
-                altitudes[i, j] = self._get_altitude([i, j])
-
+            # Define the height
+            for i in range(self.height + 1):
+                for j in range(self.width + 1):
+                    altitudes[i, j] = self._get_altitude([i, j])
+            colors = altitudes
         # Plot the height
-        self._ax.imshow(altitudes)
+        self._ax.imshow(colors)
 
         # Plot the start
         self._ax.plot(
@@ -285,6 +289,12 @@ class UnevenMaze(gym.Env):
             self._goal_position[1], self._goal_position[0], "go", markersize=10
         )
 
+        # Plot the last positions with a gray circles
+        for position in self._last_positions:
+            if position is not None:
+                self._ax.plot(
+                    position[1], position[0], "o", markersize=10, color="gray"
+                )
         # Plot the agent with orange circle with a bigger size
         self._ax.plot(
             self.current_position[1],
