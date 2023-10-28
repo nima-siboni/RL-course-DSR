@@ -51,3 +51,13 @@ def test_set():
     # Test the set function
     policy.set([0, 0], [0.1, 0.2, 0.3, 0.4])
     assert np.all(policy.get([0, 0]) == np.array([0.1, 0.2, 0.3, 0.4]))
+
+
+def test_take_action():
+    """
+    Test the take_action function of the policy class.
+    """
+    # Test the take_action function
+    assert isinstance(policy.choose_action([0, 0]), int)
+    assert policy.choose_action([0, 0]) in [0, 1, 2, 3]
+    assert policy.choose_action([0, 0]) == np.argmax(policy.get([0, 0]))

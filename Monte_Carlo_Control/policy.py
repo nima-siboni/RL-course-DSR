@@ -27,13 +27,13 @@ class Policy:
         assert np.all(low_obs == np.array([0, 0])), (
             "The lower bound of the observation space" "needs to be [0, ..., 0]."
         )
-        high_obs = env.observation_space.high
-        nr_actions = env.action_space.n
+        self._high_obs = env.observation_space.high
+        self._nr_actions = env.action_space.n
 
         # From here on, nothing depends on env.
         # The policy is a dim_obs + 1 dimensional array where the last dimension is the number
         # of actions
-        self._action_prob = np.random.rand(*high_obs, nr_actions)
+        self._action_prob = np.random.rand(*self._high_obs, self._nr_actions)
         self._action_prob = self._action_prob / np.sum(
             self._action_prob, axis=-1, keepdims=True
         )
@@ -58,3 +58,21 @@ class Policy:
         This function returns the action probabilities of all the states.
         """
         return self._action_prob
+
+    def choose_action(self, state, greedy=False):
+        """
+        Take an action based on the policy.
+
+        Args:
+            state: the state for which the action should be chosen.
+            greedy: if True, the action is chosen greedily, otherwise it is chosen based on the
+                probabilities.
+        Returns:
+            the action.
+        """
+        probabilities = self.get(state)
+        if greedy:
+            action = np.argmax(probabilities)
+        else:
+            action = np.random.choice(self._env.action_space.n, p=probabilities)
+        return action
