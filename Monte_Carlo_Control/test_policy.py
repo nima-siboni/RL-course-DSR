@@ -36,11 +36,11 @@ def test_get():
     :return: None
     """
     # Test the get function
-    assert isinstance(policy.get([0, 0]), np.ndarray)
-    assert policy.get([0, 0]).shape == (4,)
-    assert np.all(policy.get([0, 0]) >= 0)
-    assert np.all(policy.get([0, 0]) <= 1)
-    assert np.sum(policy.get([0, 0])) == 1
+    assert isinstance(policy.get_state_probability([0, 0]), np.ndarray)
+    assert policy.get_state_probability([0, 0]).shape == (4,)
+    assert np.all(policy.get_state_probability([0, 0]) >= 0)
+    assert np.all(policy.get_state_probability([0, 0]) <= 1)
+    assert np.sum(policy.get_state_probability([0, 0])) == 1
 
 
 def test_set():
@@ -49,8 +49,10 @@ def test_set():
     :return: None
     """
     # Test the set function
-    policy.set([0, 0], [0.1, 0.2, 0.3, 0.4])
-    assert np.all(policy.get([0, 0]) == np.array([0.1, 0.2, 0.3, 0.4]))
+    policy.set_state_probabilities([0, 0], [0.1, 0.2, 0.3, 0.4])
+    assert np.all(
+        policy.get_state_probability([0, 0]) == np.array([0.1, 0.2, 0.3, 0.4])
+    )
 
 
 def test_take_action():
@@ -60,4 +62,6 @@ def test_take_action():
     # Test the take_action function
     assert isinstance(policy.choose_action([0, 0]), int)
     assert policy.choose_action([0, 0]) in [0, 1, 2, 3]
-    assert policy.choose_action([0, 0]) == np.argmax(policy.get([0, 0]))
+    assert policy.choose_action([0, 0]) == np.argmax(
+        policy.get_state_probability([0, 0])
+    )

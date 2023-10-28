@@ -33,19 +33,21 @@ class Policy:
         # From here on, nothing depends on env.
         # The policy is a dim_obs + 1 dimensional array where the last dimension is the number
         # of actions
-        self._action_prob = np.random.rand(*self._high_obs, self._nr_actions)
-        self._action_prob = self._action_prob / np.sum(
-            self._action_prob, axis=-1, keepdims=True
+        self._action_prob = np.full(
+            tuple(self._high_obs) + (self._nr_actions,), 1.0 / self._nr_actions
+        )
+        assert (np.sum(self._action_prob, axis=-1) == 1.0).all(), (
+            "The probabilities are not " "normalized."
         )
 
-    def get(self, state):
+    def get_state_probability(self, state):
         """
         This function gets the state and returns the probability of each action.
         """
         state = np.array(state, dtype=np.int32)
         return self._action_prob[tuple(state)]
 
-    def set(self, state, probabilities):
+    def set_state_probabilities(self, state, probabilities):
         """
         This function sets the probabilities of actions for a given state.
         """
@@ -70,9 +72,17 @@ class Policy:
         Returns:
             the action.
         """
-        probabilities = self.get(state)
+        probabilities = self.get_state_probability(state)
         if greedy:
             action = np.argmax(probabilities)
         else:
             action = np.random.choice(self._env.action_space.n, p=probabilities)
         return action
+
+    def set(self, probabilities):
+        """
+        Updates the probabilities of actions in the policy.
+        Args:
+            probabilities: the new probabilities of actions.
+        """
+        self._action_prob = probabilities
