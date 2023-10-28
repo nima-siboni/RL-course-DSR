@@ -85,10 +85,8 @@ class UnevenMaze(gym.Env):
         # Define the observation space
         self.observation_space = gym.spaces.Box(
             low=np.array([0, 0]),
-            high=np.array(
-                [self.height, self.width]
-            ),
-            dtype=np.float32,
+            high=np.array([self.height, self.width]),
+            dtype=np.int,
         )
 
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, bool, Dict[str, Any]]:
@@ -192,7 +190,9 @@ class UnevenMaze(gym.Env):
 
         return np.array(next_position)
 
-    def _get_reward(self, last_position: List[int], current_position: List[int]) -> float:
+    def _get_reward(
+        self, last_position: List[int], current_position: List[int]
+    ) -> float:
         """
         Get the reward.
         :param last_position: the last position
