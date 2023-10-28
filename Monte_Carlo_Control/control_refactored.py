@@ -9,6 +9,7 @@ from rl_utils import calculate_epsilon
 
 from uneven_maze.uneven_maze import UnevenMaze, sample_terrain_function
 
+# 1. Initialization
 env_config = {
     "width": 10,
     "height": 5,
@@ -21,9 +22,7 @@ env_config = {
 }
 
 env = UnevenMaze(config=env_config)
-
 policy = Policy(env)
-
 agent = Agent(env, policy=policy, gamma=0.98)
 INITIAL_EPSILON = 1.0
 epsilon = copy.deepcopy(INITIAL_EPSILON)
@@ -39,4 +38,5 @@ for training_iteration in range(50):
         training_id=training_iteration,
         epsilon_decay_window=10,
     )
+    # For the fun of evaluation
     agent.run_an_episode(state=[0, 0], render=True, greedy=True, colors="values")
