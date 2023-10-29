@@ -76,6 +76,7 @@ class UnevenMaze(gym.Env):
         self._goal_position: Tuple[int, int] = config["goal_position"]
         self._max_steps: int = config["max_steps"]
         self._diagonal_actions: bool = config["diagonal_actions"]
+        self._walled_maze: bool = config["walled_maze"]
         self._current_step = 0
         self._current_position = None
         self._last_position = None
@@ -93,6 +94,7 @@ class UnevenMaze(gym.Env):
             high=np.array([self.height, self.width]),
             dtype=np.int,
         )
+        self._prohibited_positions = self._find_prohibited_positions()
 
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, bool, Dict[str, Any]]:
         """
@@ -158,7 +160,9 @@ class UnevenMaze(gym.Env):
         self._last_positions = []
         return observation, info_reset
 
-    def _get_next_position(self, action) -> np.ndarray:
+    def _get_next_position(  # pylint: disable=too-many-branches
+        self, action
+    ) -> np.ndarray:
         """
         Get the next position.
         :param action: the action to take
@@ -196,6 +200,10 @@ class UnevenMaze(gym.Env):
             next_position[0] = self.current_position[0]
         if next_position[1] < 0 or next_position[1] >= self.width:
             next_position[1] = self.current_position[1]
+
+        # if the agent goes to a prohibited position, it stays in the same position
+        if np.all(next_position == np.array(self._prohibited_positions), axis=-1).any():
+            next_position = copy.deepcopy(self.current_position)
 
         return np.array(next_position)
 
@@ -368,3 +376,14 @@ class UnevenMaze(gym.Env):
     def state(self) -> np.ndarray:
         """Returns the observation"""
         return self._get_observation()
+
+    def _find_prohibited_positions(self) -> List[np.ndarray]:
+        """Returns the prohibited positions"""
+        tmp = []
+        opening_width = 1
+        if self._walled_maze:
+            wall_h = self.height // 2
+            tmp = [np.array([wall_h, i]) for i in range(self.width)]
+            for _ in range(opening_width):
+                tmp.pop(self.width // 2 + 1)
+        return tmp

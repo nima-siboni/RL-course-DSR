@@ -11,15 +11,16 @@ from uneven_maze.uneven_maze import UnevenMaze, sample_terrain_function
 
 # 1. Initialization
 env_config = {
-    "width": 10,
+    "width": 5,
     "height": 5,
     "mountain_height": 1.0,
     "goal_position": [4, 0],
-    "max_steps": 25,
+    "max_steps": 100,
     "cost_height": 0.0,
     "cost_step": 1.0,
     "terrain_function": sample_terrain_function,
     "diagonal_actions": False,
+    "walled_maze": True,
 }
 
 env = UnevenMaze(config=env_config)
