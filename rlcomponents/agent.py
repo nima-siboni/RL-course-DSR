@@ -1,6 +1,9 @@
+# pylint: disable=invalid-name
 """
 A class for the agent
 """
+import copy
+
 import numpy as np
 from policy import Policy
 from tqdm import tqdm
@@ -44,7 +47,7 @@ class Agent:
             render: the render flag
             greedy: if True, the action is chosen greedily, otherwise it is chosen based on the
                     probabilities.
-            color: the color code of the environment when rendered.
+            colors: the color code of the environment when rendered.
         Returns:
             the total reward
         """
@@ -99,7 +102,7 @@ class Agent:
             values[indices] = self.evaluate_pi_for_a_state(
                 list(indices), eval_episodes, greedy=greedy
             )
-        self._values_of_current_pi = values
+        self.policy.values = values
         return values
 
     def _calculate_qs_for_a_state(self, state, values, gamma):
@@ -202,4 +205,95 @@ class Agent:
         """
         Returns the values of the current policy.
         """
-        return self._values_of_current_pi
+        return self.policy.values
+
+    def _find_greedy_policy_using_qs(self, q_values):
+        """
+        Finds the greedy policy based on the Q values.
+        """
+        greedy_policy = np.zeros_like(self.policy.action_prob)
+        state_space_shape = greedy_policy.shape[:-1]
+        for state in np.ndindex(state_space_shape):
+            qs_for_state = q_values[state]
+            greedy_action_id = self._greedy_action_based_on_q(qs_for_state)
+            greedy_policy[state + (greedy_action_id,)] = 1.0
+        return greedy_policy
+
+    def find_epsilon_greedy_policy_using_qs(self, q_values, epsilon):
+        """
+        Finds the epsilon greedy policy based on the Q values.
+        """
+        greedy_policy = self._find_greedy_policy_using_qs(q_values)
+        epsilon_greedy_policy = self._epsilon_soften_the_policy(
+            greedy_policy=greedy_policy, epsilon=epsilon
+        )
+        return epsilon_greedy_policy
+
+    def run_an_episode_and_learn_from_it(self, alpha):
+        """
+        Runs an episode and learns from it.
+        """
+        state, _ = self.env.reset()
+        done = False
+        while not done:
+            action_id = self.choose_action(state, greedy=False)
+            state_prime, reward, terminated, truncated, _ = self.env.step(action_id)
+            transition = {
+                "s": state,
+                "a": action_id,
+                "r": reward,
+                "s'": state_prime,
+                "terminated": terminated,
+            }
+            done = terminated or truncated
+            state = copy.deepcopy(state_prime)
+            self._learn_q(transition, alpha)
+
+    def _learn_q(self, transition, alpha):
+        """
+        Update the Q tabel using one s,a,r,s'
+        q <- q + alpha * (r + gamma * max_a' q(s',a') - q(s,a)) if s' is not terminal
+        q <- r if s' is terminal
+        """
+        s = tuple(transition["s"])
+        s_prime = tuple(transition["s'"])
+        terminated = transition["terminated"]
+        a = transition["a"]
+        r = transition["r"]
+
+        q_s_a = self.policy.q_values[s + (a,)]
+        q_s_prime = self.policy.q_values[s_prime]
+        if not terminated:
+            correction_term = r + self.gamma * np.max(q_s_prime) - q_s_a
+            q_s_a = q_s_a + alpha * correction_term
+        else:
+            q_s_a = r
+        self.policy.q_values[s + (a,)] = q_s_a
+
+    def run_an_episode_using_q_values(
+        self, state, render=False, epsilon=0.1, greedy=False, colors=None
+    ):
+        """
+        Runs an episode from a given state using the q-values.
+
+        Note: to reuse the already existing run_and_episode method (which uses the policy) we
+        create a policy from the q-values and set it as the current policy.
+
+        Note: here we use a greedy policy.
+
+        Args:
+            state: the starting state
+            render: the render flag
+            colors: the color code of the environment when rendered.
+        Returns:
+            the total reward
+        """
+        pi = self.find_epsilon_greedy_policy_using_qs(
+            self.policy.q_values, epsilon=epsilon
+        )
+        self.set_policy(pi)
+        self.policy.values = np.sum(self.policy.q_values * pi, axis=-1)
+        total_reward = self.run_an_episode(
+            state=state, render=render, greedy=greedy, colors=colors
+        )
+        return total_reward

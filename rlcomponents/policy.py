@@ -39,6 +39,10 @@ class Policy:
         assert (np.sum(self._action_prob, axis=-1) == 1.0).all(), (
             "The probabilities are not " "normalized."
         )
+        self.q_values = np.zeros(
+            tuple(self._high_obs) + (self._nr_actions,), dtype=np.float32
+        )
+        self.values = None
 
     def get_state_probability(self, state):
         """
