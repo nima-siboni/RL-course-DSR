@@ -63,6 +63,8 @@ class Agent:
                     self.env.render(colors=self.values_of_current_pi())
                 else:
                     self.env.render()
+            if greedy and (state == next_state).all():
+                truncated = True
             state = next_state
             done = terminated or truncated
         return total_reward
