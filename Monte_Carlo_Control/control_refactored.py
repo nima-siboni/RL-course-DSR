@@ -19,6 +19,7 @@ env_config = {
     "cost_height": 0.0,
     "cost_step": 1.0,
     "terrain_function": sample_terrain_function,
+    "diagonal_actions": False,
 }
 
 env = UnevenMaze(config=env_config)
