@@ -284,6 +284,8 @@ class Agent:
         Args:
             state: the starting state
             render: the render flag
+            epsilon: the epsilon for the epsilon-soft policy
+            greedy: if True, the action is chosen greedily, otherwise it is chosen based on the
             colors: the color code of the environment when rendered.
         Returns:
             the total reward
