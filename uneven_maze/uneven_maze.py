@@ -75,13 +75,17 @@ class UnevenMaze(gym.Env):
         self._start_position: Optional[List[int]] = None
         self._goal_position: Tuple[int, int] = config["goal_position"]
         self._max_steps: int = config["max_steps"]
+        self._diagonal_actions: bool = config["diagonal_actions"]
         self._current_step = 0
         self._current_position = None
         self._last_position = None
         self._fig = None
         self._ax = None
         # Define the action space
-        self.action_space = gym.spaces.Discrete(8)
+        if self._diagonal_actions:
+            self.action_space = gym.spaces.Discrete(8)
+        else:
+            self.action_space = gym.spaces.Discrete(4)
 
         # Define the observation space
         self.observation_space = gym.spaces.Box(
@@ -111,7 +115,8 @@ class UnevenMaze(gym.Env):
 
         # Get the reward
         reward = self._get_reward(self.last_position, self.current_position)
-
+        if terminated:
+            reward = 0.0
         # Get the observation
         observation = self._get_observation()
 
@@ -161,6 +166,8 @@ class UnevenMaze(gym.Env):
         """
         # Get the next position
         next_position = self.current_position
+        if action > 3 and not self._diagonal_actions:
+            raise ValueError("Invalid action.")
         if action == 0:
             next_position[0] += 1
         elif action == 1:
@@ -229,8 +236,10 @@ class UnevenMaze(gym.Env):
         # Set the position
         # random position is generated if the position is not given
         if position is None:
-            x_position = np.random.randint(low=0, high=self.height)
-            y_position = np.random.randint(low=0, high=self.width)
+            x_position, y_position = copy.deepcopy(self._goal_position)
+            while [x_position, y_position] == self._goal_position:
+                x_position = np.random.randint(low=0, high=self.height)
+                y_position = np.random.randint(low=0, high=self.width)
             self._last_position = None
             self._current_position = [x_position, y_position]
         else:
@@ -290,7 +299,8 @@ class UnevenMaze(gym.Env):
         )
 
         # Plot the last positions with a gray circles
-        for position in self._last_positions:
+        if len(self._last_positions) > 1:
+            position = self._last_positions[-1]
             if position is not None:
                 self._ax.plot(
                     position[1], position[0], "o", markersize=10, color="gray"

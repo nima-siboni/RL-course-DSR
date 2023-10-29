@@ -13,6 +13,7 @@ CONFIG = {
     "cost_height": 2.0,
     "cost_step": 1.0,
     "terrain_function": sample_terrain_function,
+    "diagonal_actions": True
 }
 
 
@@ -242,4 +243,4 @@ def test_reward_step_contribution(config=CONFIG):
     for _ in range(num_steps):
         _, r, _, _, _ = env.step(0)
         total_reward += r
-    assert total_reward == -2.5 * num_steps
+    assert total_reward == -2.5 * (num_steps - 1)
