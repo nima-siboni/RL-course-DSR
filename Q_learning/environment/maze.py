@@ -1,11 +1,14 @@
 import copy
+from typing import List, Tuple
+
 import numpy as np
-import gym
-from gym import spaces
-from gym.utils import seeding
+import gymnasium as gym
+from gymnasium import spaces
+from gymnasium.utils import seeding
+
 
 class Maze(gym.Env):
-    '''
+    """
     An Amazing Maze environment
 
     Actions:
@@ -22,26 +25,28 @@ class Maze(gym.Env):
     Observation                   presented as      Shape                                  Range
     -----------                   -----             -------                                -------
     position                      [x, y]            (2,)                                   [0, N - 1]
-    '''
+    """
 
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, N=8, wall_length=3, seed=None):
-        super(Maze, self).__init__()
-        '''
+    def __init__(self, N: int = 8, wall_length: int = 3, seed: int = None):
+        """
         Creates a new instant of the maze environment.
 
         Arguments:
 
-        N -- the size of the maze
-        '''
+        N: the size of the maze
+        wall_length: the length of the wall separating left and right half of the maze
+        seed: the random seed
+        """
+        super(Maze, self).__init__()
 
         self.N = N
 
         assert N > 1, "too small"
 
         self.wall_length = wall_length
-        assert self.wall_length * 2 < self.N, 'The enviornment is divided into two disconnected regions.'
+        assert self.wall_length * 2 < self.N, 'The environment is divided into two disconnected regions.'
 
         # Lets first do the actions
         self.action_space = spaces.Discrete(4)
@@ -60,23 +65,28 @@ class Maze(gym.Env):
         # some extra useful variables:
         self.goal_state = np.array([self.N - 1, self.N - 1])
 
-
-    def seed(self, seed=None):
-        '''
+    def seed(self, seed=None) -> List:
+        """
         create the random generator
 
         copy-pasted from the cartpole
-        '''
+
+        Args:
+            seed: the random seed
+        """
         self.np_random, seed = seeding.np_random(seed)
         return [seed]
 
-    def reset(self, initial_state=None):
-        '''
+    def reset(self, initial_state=None) -> np.ndarray:
+        """
         resets the agent to a random initial state
 
-        Arguments:
-        initial_state -- the agents state is set to this argument. If None is provided it is set randomly.
-        '''
+        Args:
+            initial_state -- the agents state is set to this argument. If None is provided it is set randomly.
+
+        Returns:
+            the resetted state.
+        """
         # reset time
 
         self.steps_beyond_done = False
@@ -90,15 +100,18 @@ class Maze(gym.Env):
 
         return self.state
 
-    def is_the_new_state_allowed(self, new_state):
-        '''
+    def is_the_new_state_allowed(self, new_state: np.ndarray) -> bool:
+        """
         checks if the state is allowed:
         the state is not allowed if the agent is steping out the grid
         or on the obstacles.
 
-        returns:
-        res -- a boolean showing that the state is allowed (True) or not (False).
-        '''
+        Args:
+            new_state: the state to be checked.
+
+        Returns:
+            a boolean showing that the state is allowed (True) or not (False).
+        """
 
         res = True
 
@@ -117,21 +130,20 @@ class Maze(gym.Env):
 
         return res
 
-    def step(self, action):
-        '''
+    def step(self, action: int) -> Tuple:
+        """
         one step in the maze!
 
-        Argument:
-        action -- the chosen action
+        Arguments:
+            action: the chosen action
 
         Returns:
-
-        state -- the new state
-        done -- True if the process is terminated. The process is terminated if the agent hits the wall, or reaches the goal
-        reward -- the reward is -1 for an accepted step and large value (-2 * self.N) for hitting the wall, and 0 for reaching the goal.
-        info -- forget about it!
-        '''
-
+            a tuple of:
+            state: the new state
+            terminated: True if the process is terminated. The process is terminated if the agent hits the wall, or reaches the goal
+            reward: the reward is -1 for an accepted step and large value (-2 * self.N) for hitting the wall, and 0 for reaching the goal.
+            info: forget about it!
+        """
         # Let's make a copy of the state first
         obsv = copy.deepcopy(self.state)
 
