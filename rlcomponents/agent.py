@@ -119,13 +119,7 @@ class Agent:
         Returns:
             the Q values for the given state
         """
-        nr_actions = self.env.action_space.n
-        q_values = np.zeros(nr_actions)
-        for action_id in range(nr_actions):
-            self.env.reset(options={"start_position": state})
-            next_state, reward, _, _, _ = self.env.step(action_id)
-            q_values[action_id] = reward + gamma * values[tuple(next_state)]
-        return q_values
+        raise NotImplementedError
 
     @staticmethod
     def _greedy_action_based_on_q(q_values):
@@ -257,20 +251,7 @@ class Agent:
         q <- q + alpha * (r + gamma * max_a' q(s',a') - q(s,a)) if s' is not terminal
         q <- r if s' is terminal
         """
-        s = tuple(transition["s"])
-        s_prime = tuple(transition["s'"])
-        terminated = transition["terminated"]
-        a = transition["a"]
-        r = transition["r"]
-
-        q_s_a = self.policy.q_values[s + (a,)]
-        q_s_prime = self.policy.q_values[s_prime]
-        if not terminated:
-            correction_term = r + self.gamma * np.max(q_s_prime) - q_s_a
-            q_s_a = q_s_a + alpha * correction_term
-        else:
-            q_s_a = r
-        self.policy.q_values[s + (a,)] = q_s_a
+        raise NotImplementedError
 
     def run_an_episode_using_q_values(
         self, state, render=False, epsilon=0.1, greedy=False, colors=None
