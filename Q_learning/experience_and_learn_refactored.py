@@ -4,15 +4,26 @@ A Monte Carlo control algorithm for the uneven terrain problem.
 import copy
 
 from agent import Agent
-from control_refactored import env_config
 from policy import Policy
 from rl_utils import calculate_epsilon
 from tqdm import tqdm
 
-from uneven_maze.uneven_maze import UnevenMaze
+from uneven_maze import UnevenMaze, sample_terrain_function
 
 # 1. Initialization
 
+env_config = {
+    "width": 5,
+    "height": 5,
+    "mountain_height": 1.0,
+    "goal_position": [4, 0],
+    "max_steps": 100,
+    "cost_height": 0.0,
+    "cost_step": 1.0,
+    "terrain_function": sample_terrain_function,
+    "diagonal_actions": False,
+    "walled_maze": True,
+}
 env = UnevenMaze(config=env_config)
 policy = Policy(env)
 agent = Agent(env, policy=policy, gamma=0.99)

@@ -7,7 +7,7 @@ from agent import Agent
 from policy import Policy
 from rl_utils import calculate_epsilon
 
-from uneven_maze.uneven_maze import UnevenMaze, sample_terrain_function
+from uneven_maze import UnevenMaze, sample_terrain_function
 
 # 1. Initialization
 env_config = {
