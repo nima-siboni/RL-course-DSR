@@ -24,7 +24,7 @@ class Agent:
         self.policy = Policy(env) if policy is None else policy
         self.gamma = gamma
 
-    def choose_action(self, state, greedy=False):
+    def compute_single_action(self, state, greedy=False):
         """
         Returns an action based on the policy
 
@@ -55,7 +55,7 @@ class Agent:
         state, _ = self.env.reset(options={"start_position": state})
         done = False
         while not done:
-            action = self.choose_action(state, greedy=greedy)
+            action = self.compute_single_action(state, greedy=greedy)
             next_state, reward, terminated, truncated, _ = self.env.step(action)
             total_reward += reward
             if render:
@@ -81,10 +81,10 @@ class Agent:
         Returns:
             the value of the state under the policy
         """
-        value = 0
+        total_reward = 0
         for _ in range(eval_episodes):
-            value += self.run_an_episode(state, greedy=greedy)
-        return value / eval_episodes
+            total_reward += self.run_an_episode(state, greedy=greedy)
+        return total_reward / eval_episodes
 
     def evaluate_pi(self, eval_episodes, greedy=False):
         """
@@ -232,7 +232,7 @@ class Agent:
         state, _ = self.env.reset()
         done = False
         while not done:
-            action_id = self.choose_action(state, greedy=False)
+            action_id = self.compute_single_action(state, greedy=False)
             state_prime, reward, terminated, truncated, _ = self.env.step(action_id)
             transition = {
                 "s": state,
