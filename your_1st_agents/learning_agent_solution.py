@@ -1,8 +1,7 @@
 """Your first learning agent."""
 import gymnasium as gym
+from plot_util import visualize_env
 from ray.rllib.algorithms.dqn import DQNConfig
-
-from your_1st_agents.plot_util import visualize_env
 
 # 0 - Choose an algorithm from ray.rllib.algorithms, e.g. ray.rllib.algorithms.xxx as
 # xxxConfig
