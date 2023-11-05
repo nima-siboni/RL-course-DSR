@@ -92,7 +92,7 @@ class UnevenMaze(gym.Env):
         self.observation_space = gym.spaces.Box(
             low=np.array([0, 0]),
             high=np.array([self.height, self.width]),
-            dtype=np.int,
+            dtype=np.int32,
         )
         self._prohibited_positions = self._find_prohibited_positions()
 
