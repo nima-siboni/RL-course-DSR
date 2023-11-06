@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e583f773-e25c-492e-b7cd-d95e276cdcd2" name="Changes" comment="clean up trash">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsr_rl_course.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsr_rl_course.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsr_rl_course.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dsr_rl_course.egg-info/top_level.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1692371582" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/uneven_maze" />
+            </RecentBranchesForRepo>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="feat/changing-env-and-refactoring" />
+                    <option name="lastUsedInstant" value="1699042038" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1699042015" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/.local/lib/python3.10/site-packages/numpy/__init__.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/miniconda3/envs/rl/lib/python3.10/site-packages/gymnasium/__init__.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UA7ks3dFgkQPs2hG56ucOcveUP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/changing-env-and-refactoring&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/nima/tmp/RL-course-DSR&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/agents" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.control">
+    <configuration name="control" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL-course-DSR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Monte_Carlo_Control" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Monte_Carlo_Control/control.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="experience_and_learn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL-course-DSR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Q_learning" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Q_learning/experience_and_learn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="learning_agent" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL-course-DSR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/your_1st_agents" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/your_1st_agents/learning_agent.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="playground" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL-course-DSR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interaction_with_env" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interaction_with_env/playground.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="random_agent" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL-course-DSR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/your_1st_agents" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/your_1st_agents/random_agent.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.control" />
+        <item itemvalue="Python.learning_agent" />
+        <item itemvalue="Python.random_agent" />
+        <item itemvalue="Python.playground" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e583f773-e25c-492e-b7cd-d95e276cdcd2" name="Changes" comment="" />
+      <created>1692370677032</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692370677032</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fix: Q-learning">
+      <option name="closed" value="true" />
+      <created>1692380789215</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1692380789215</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: first learning agent">
+      <option name="closed" value="true" />
+      <created>1692381563793</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1692381563793</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: making the uneven_maze discrete">
+      <option name="closed" value="true" />
+      <created>1698503457993</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698503457993</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: policy and tests are added.">
+      <option name="closed" value="true" />
+      <created>1698503855554</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698503855554</updated>
+    </task>
+    <task id="LOCAL-00005" summary="policy is improved.">
+      <option name="closed" value="true" />
+      <created>1698509579031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698509579031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="the visualization is improved by adding color code and trace">
+      <option name="closed" value="true" />
+      <created>1698527904244</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698527904244</updated>
+    </task>
+    <task id="LOCAL-00007" summary="policy is improved by:&#10;&#10;-high entropy initial policy&#10;&#10;-refactored func names">
+      <option name="closed" value="true" />
+      <created>1698528124167</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698528124167</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactored">
+      <option name="closed" value="true" />
+      <created>1698528159056</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698528159056</updated>
+    </task>
+    <task id="LOCAL-00009" summary="import errors are ignored in pylint">
+      <option name="closed" value="true" />
+      <created>1698529102243</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698529102243</updated>
+    </task>
+    <task id="LOCAL-00010" summary="no name in module errors are ignored in pylint">
+      <option name="closed" value="true" />
+      <created>1698529170205</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698529170205</updated>
+    </task>
+    <task id="LOCAL-00011" summary="agent class is introduced and used">
+      <option name="closed" value="true" />
+      <created>1698529180926</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1698529180926</updated>
+    </task>
+    <task id="LOCAL-00012" summary="refactored empty lines">
+      <option name="closed" value="true" />
+      <created>1698529305307</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698529305307</updated>
+    </task>
+    <task id="LOCAL-00013" summary="some tests for the agent is added, some clean up is done">
+      <option name="closed" value="true" />
+      <created>1698529498860</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1698529498860</updated>
+    </task>
+    <task id="LOCAL-00014" summary="refactoring">
+      <option name="closed" value="true" />
+      <created>1698574095687</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1698574095687</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: one can disable diagonal actions&#10;feat: reward of getting to terminal state is set to 0">
+      <option name="closed" value="true" />
+      <created>1698587132892</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1698587132892</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix: for diagonal actions">
+      <option name="closed" value="true" />
+      <created>1698587192915</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1698587192915</updated>
+    </task>
+    <task id="LOCAL-00017" summary="qlearning is added">
+      <option name="closed" value="true" />
+      <created>1698587362703</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1698587362703</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Doc">
+      <option name="closed" value="true" />
+      <created>1698587430869</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1698587430869</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: kill after getting into a simple loop">
+      <option name="closed" value="true" />
+      <created>1698596344365</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1698596344365</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: walls are introduced.">
+      <option name="closed" value="true" />
+      <created>1698597511891</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1698597511891</updated>
+    </task>
+    <task id="LOCAL-00021" summary="deleting">
+      <option name="closed" value="true" />
+      <created>1698597524064</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1698597524064</updated>
+    </task>
+    <task id="LOCAL-00022" summary="updating the learning_agent">
+      <option name="closed" value="true" />
+      <created>1699037054780</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699037054780</updated>
+    </task>
+    <task id="LOCAL-00023" summary="updating the MD file">
+      <option name="closed" value="true" />
+      <created>1699037434087</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1699037434087</updated>
+    </task>
+    <task id="LOCAL-00024" summary="cleaning up the setup">
+      <option name="closed" value="true" />
+      <created>1699040436346</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1699040436346</updated>
+    </task>
+    <task id="LOCAL-00025" summary="delete old file">
+      <option name="closed" value="true" />
+      <created>1699040559009</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1699040559009</updated>
+    </task>
+    <task id="LOCAL-00026" summary="delete old file and rename the refactored file">
+      <option name="closed" value="true" />
+      <created>1699040630738</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1699040630738</updated>
+    </task>
+    <task id="LOCAL-00027" summary="renaming">
+      <option name="closed" value="true" />
+      <created>1699041019568</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699041019568</updated>
+    </task>
+    <task id="LOCAL-00028" summary="renaming and deleting test_env.py">
+      <option name="closed" value="true" />
+      <created>1699041086394</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1699041086394</updated>
+    </task>
+    <task id="LOCAL-00029" summary="delete two functions as an exercise: to be reverted">
+      <option name="closed" value="true" />
+      <created>1699041253409</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1699041253409</updated>
+    </task>
+    <task id="LOCAL-00030" summary="refactor: variable changes">
+      <option name="closed" value="true" />
+      <created>1699194108227</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1699194108227</updated>
+    </task>
+    <task id="LOCAL-00031" summary="refactor: fixed import">
+      <option name="closed" value="true" />
+      <created>1699194192559</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1699194192559</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix: np.int -&gt; np.int32">
+      <option name="closed" value="true" />
+      <created>1699194254452</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1699194254452</updated>
+    </task>
+    <task id="LOCAL-00033" summary="adding gitignore and remove trash">
+      <option name="closed" value="true" />
+      <created>1699230866277</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1699230866277</updated>
+    </task>
+    <task id="LOCAL-00034" summary="adding gitignore and remove trash">
+      <option name="closed" value="true" />
+      <created>1699230986269</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1699230986269</updated>
+    </task>
+    <task id="LOCAL-00035" summary="clean up trash">
+      <option name="closed" value="true" />
+      <created>1699231067586</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1699231067586</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactored empty lines" />
+    <MESSAGE value="some tests for the agent is added" />
+    <MESSAGE value="some tests for the agent is added, some clean up is done" />
+    <MESSAGE value="refactoring" />
+    <MESSAGE value="feat: one can disable diagonal actions&#10;feat: reward of getting to terminal state is set to 0" />
+    <MESSAGE value="fix: for diagonal actions" />
+    <MESSAGE value="qlearning is added" />
+    <MESSAGE value="Doc" />
+    <MESSAGE value="feat: kill after getting into a simple loop" />
+    <MESSAGE value="feat: walls are introduced." />
+    <MESSAGE value="deleting" />
+    <MESSAGE value="updating the learning_agent" />
+    <MESSAGE value="updating the MD file" />
+    <MESSAGE value="cleaning up setup" />
+    <MESSAGE value="cleaning up the setup" />
+    <MESSAGE value="delete old file" />
+    <MESSAGE value="delete old file and rename the refactored file" />
+    <MESSAGE value="renaming" />
+    <MESSAGE value="renaming and deleting test_env.py" />
+    <MESSAGE value="delete two functions as an exercise: to be reverted" />
+    <MESSAGE value="refactor: variable changes" />
+    <MESSAGE value="refactor: fixed import" />
+    <MESSAGE value="fix: np.int -&gt; np.int32" />
+    <MESSAGE value="adding gitignore and remove trash" />
+    <MESSAGE value="clean up trash" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up trash" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Q_learning/experience_and_learn.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Q_learning/experience_and_learn.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/your_1st_agents/random_agent.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/your_1st_agents/learning_agent.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/your_1st_agents/learning_agent.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/rlcomponents/agent.py</url>
+          <line>183</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
