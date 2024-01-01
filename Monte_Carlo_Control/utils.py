@@ -1,10 +1,11 @@
+"""Some general utils"""
 from typing import List
 
 import numpy as np
 
 
-def dstack_product(x: List, y: List) -> np.ndarray:
+def return_all_the_state(x_values: List, y_values: List) -> np.ndarray:
     """
-    Takes to list and returns their Cartesian product.
+    Takes two lists and returns their Cartesian product.
     """
-    return np.dstack(np.meshgrid(x, y)).reshape(-1, 2)
+    return np.dstack(np.meshgrid(x_values, y_values)).reshape(-1, 2)

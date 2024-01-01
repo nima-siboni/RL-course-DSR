@@ -1,9 +1,12 @@
-pyglet
-pygame
-numpy
-matplotlib
-tqdm
+-e rlcomponents
+-e uneven_maze
 gymnasium
-tensorflow
+matplotlib
+numpy
+pygame
+pyglet
+pylint
+ray[default]
 ray[rllib]
-ray[default]      
+tensorflow
+tqdm

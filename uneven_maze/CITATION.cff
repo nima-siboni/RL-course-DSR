@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "H. SIBONI"
+  given-names: "NIMA"
+
+title: "UnevenMaze"
+version: 0.1.0
+date-released: 2023-07-12
+url: "https://github.com/nima-siboni/uneven_maze"
