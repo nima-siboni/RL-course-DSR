@@ -1,9 +1,9 @@
 # Investigate an environment together
-The goal of this practice is to:
-* get familiar with creating an enviornment
-* checking some properties of the environment, e.g. observation_space, action_space, 
+The goal of this practice is to get hands-on with env.s:
+- [ ] get familiar with creating an enviornment
+- [ ] check some properties of the environment, e.g. observation_space, action_space,
   etc.
-* interact with the environment, e.g. reset it, pass actions to it, get feedback from 
+- [ ] interact with the environment, e.g. reset it, pass actions to it, get feedback from
   it, etc.
 
 ## 0 - Create an environment

@@ -1,11 +1,11 @@
 # The Learning Agent
 Here, step through the process of creating a learning agent, training it, and
 evaluting the trained agent. The goal of this exercise is to:
-* Get familiar with RLlib as an example of RL frameworks used in industry
-* Choosing a learning algorithm
-* Configuring the algorithm
-* Training the agent
-* Visualize and evaluate the trained agent
+- [ ] Get familiar with RLlib as an example of RL frameworks used in industry
+- [ ] Choosing a learning algorithm
+- [ ] Configuring the algorithm
+- [ ] Training the agent
+- [ ] Visualize and evaluate the trained agent
 
 ## 0 - Choose an algorithm
 This might sound surprising at decision to make at this stage but you should choose the learning
