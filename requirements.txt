@@ -1,12 +1,12 @@
 -e rlcomponents
 -e uneven_maze
-gymnasium
-matplotlib
-numpy
-pygame
-pyglet
-pylint
-ray[default]
-ray[rllib]
-tensorflow
-tqdm
+gymnasium==0.28.1
+matplotlib==3.6.3
+numpy==1.26.4
+pygame==2.5.2
+pyglet==2.0.14
+pylint==3.1.0
+ray[default]==2.9.3
+ray[rllib]==2.9.3
+tensorflow==2.15.0
+tqdm==4.65.0
