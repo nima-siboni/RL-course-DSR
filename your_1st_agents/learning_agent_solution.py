@@ -34,7 +34,15 @@ config_as_dict = config.to_dict()
 # 1.3 - Modify the config if needed, e.g. change the "num_gpus" to 0, or change the learning_rate
 # (lr)
 # 1.4 - Introduce the environment to the agent's config
-config.environment(env="CartPole-v1").framework(framework="tf")
+config.environment(env="CartPole-v1").framework(
+    framework="tf2", eager_tracing=True
+).rollouts(num_rollout_workers=4, num_envs_per_worker=2).evaluation(
+    evaluation_config={"explore": False},
+    evaluation_duration=10,
+    evaluation_interval=1,
+    evaluation_duration_unit="episodes",
+)
+
 # 1.5 - Build the agent from the config with .build()
 
 agent = config.build()
