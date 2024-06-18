@@ -3,6 +3,7 @@ A Monte Carlo control algorithm for the uneven terrain problem.
 """
 import copy
 
+import matplotlib
 from agent import Agent
 from policy import Policy
 from rl_utils import calculate_epsilon
@@ -46,6 +47,7 @@ for training_iteration in tqdm(range(50)):
     for _ in range(50):
         agent.run_an_episode_and_learn_from_it(alpha=0.1)
 
+    matplotlib.pyplot.close()
     agent.run_an_episode_using_q_values(
         state=[0, 0], render=True, epsilon=epsilon, greedy=True, colors="values"
     )

@@ -3,6 +3,7 @@ A Monte Carlo control algorithm for the uneven terrain problem.
 """
 import copy
 
+import matplotlib
 from agent import Agent
 from policy import Policy
 from rl_utils import calculate_epsilon
@@ -41,4 +42,5 @@ for training_iteration in range(50):
         epsilon_decay_window=10,
     )
     # For the fun of evaluation
+    matplotlib.pyplot.close()
     agent.run_an_episode(state=[0, 0], render=True, greedy=True, colors="values")
