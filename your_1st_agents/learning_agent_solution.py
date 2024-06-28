@@ -1,5 +1,6 @@
 """Your first learning agent."""
 import gymnasium as gym
+from matplotlib import pyplot as plt
 from plot_util import visualize_env
 from ray.rllib.algorithms.dqn import DQNConfig
 
@@ -47,14 +48,26 @@ config.environment(env="CartPole-v1").framework(
 
 agent = config.build()
 # 2 - Train the agent for one training round with .train and get the reports
-reports = agent.train()
-print(reports)
+# reports = agent.train()
+# print(reports)
 
 # 3 - Run a loop for nr_trainings = 50 times
-nr_trainings = 1  # pylint: disable=invalid-name
+nr_trainings = 100  # pylint: disable=invalid-name
+mean_rewards = []
 for _ in range(nr_trainings):
     reports = agent.train()
     print(_, reports["episode_reward_mean"])
+    mean_rewards.append(reports["episode_reward_mean"])
+
+# plot the mean rewards
+plt.plot(mean_rewards)
+plt.xlabel("Training rounds")
+plt.ylabel("Mean reward")
+plt.title("Mean reward vs. training rounds")
+# save the plot
+plt.savefig("mean_reward_vs_training_rounds_2.png")
+plt.close()
+
 
 # 4 - Visualize the trained agent; This is similar to running the random_agent,
 # except that this time we have a trained agent
