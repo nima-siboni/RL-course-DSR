@@ -6,7 +6,7 @@ from gymnasium import logger
 from gymnasium.envs.classic_control import CartPoleEnv
 
 
-class LearnedEnv(CartPoleEnv):
+class LearnedCartPole(CartPoleEnv):
     """A gymnasium environemnt which inherets from CartPole-v1 and the only different is that the
     step function is replaced by a learned model."""
 
@@ -53,11 +53,3 @@ class LearnedEnv(CartPoleEnv):
         if self.render_mode == "human":
             self.render()
         return np.array(self.state, dtype=np.float32), reward, terminated, False, {}
-
-
-#
-# # test the LearnedEnv
-# env = LearnedEnv(render_mode="rgb_array", model_path="model_based_rl_model.h5")
-# env.reset()
-# env.step(0)
-# print("bye.")

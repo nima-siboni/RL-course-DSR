@@ -17,22 +17,17 @@ next state. We implement the model in keras and train it for 100 epochs, then sa
 import keras
 import numpy as np
 import pandas as pd
-from keras import layers
-from keras.models import Model
+from utils import create_and_return_a_model
 
 # 1. Load the data set
 list_of_data_files = [
-    "data_set_0_rounds.pkl",
-    "data_set_10_rounds.pkl",
-    "data_set_20_rounds.pkl",
-    "data_set_30_rounds.pkl",
-    "data_set_40_rounds.pkl",
-    "data_set_50_rounds.pkl",
-    "data_set_60_rounds.pkl",
-    "data_set_70_rounds.pkl",
-    "data_set_80_rounds.pkl",
-    "data_set_90_rounds.pkl",
+    "data_sets/data_set_0_rounds.pkl",
+    "data_sets/data_set_10_rounds.pkl",
+    "data_sets/data_set_20_rounds.pkl",
+    "data_sets/data_set_30_rounds.pkl",
+    "data_sets/data_set_40_rounds.pkl",
 ]
+
 data = pd.concat([pd.read_pickle(file) for file in list_of_data_files])
 # print number of raw of data
 print(data.shape)
@@ -44,25 +39,15 @@ action = np.array(data["action"].tolist())
 next_state = np.array(data["next_state"].tolist())
 
 # 2. Define the model
-state_input = layers.Input(shape=(4,))
-action_input = layers.Input(shape=(1,))
-concat = layers.Concatenate()([state_input, action_input])
-hidden = layers.Dense(64, activation="relu")(concat)
-hidden = layers.Dense(64, activation="relu")(hidden)
-hidden = layers.Dense(64, activation="relu")(hidden)
-next_state_output = layers.Dense(4)(hidden)
-model = Model(inputs=[state_input, action_input], outputs=next_state_output)
-model.compile(optimizer="adam", loss="mse")
-model.summary()
-
+model = create_and_return_a_model([64, 64, 64])
 # 3. Train the model
 model.fit([state, action], next_state, epochs=40)
 
 # 4. Save the model
-model.save("model_based_rl_model_good.h5")
+model.save("nn_models/model_based_rl_model_good.h5")
 print("Model saved.")
 # 5. Load the model
-model = keras.models.load_model("model_based_rl_model_good.h5")
+model = keras.models.load_model("nn_models/model_based_rl_model_good.h5")
 
 # 6. Predict the next state
 state = np.array([[0.0, 0.0, 0.0, 0.0]])

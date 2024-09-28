@@ -14,6 +14,7 @@ import gymnasium as gym
 import pandas as pd
 from matplotlib import pyplot as plt
 from ray.rllib.algorithms.dqn.dqn import DQNConfig
+from tqdm import tqdm
 
 
 # 1. Create a class which has an data_creator that can be trained for a number of training episodes.
@@ -54,7 +55,7 @@ class DataCreator:
         """
         _data_set = []
         sum_reward = 0
-        for _ in range(nr_episodes):
+        for _ in tqdm(range(nr_episodes), "Generating episodes"):
             state, _ = self.env.reset()
             done = False
             while not done:
@@ -80,12 +81,12 @@ class DataCreator:
 data_creator = DataCreator()  # pylint: disable=invalid-name
 nr_training_rounds = 10  # pylint: disable=invalid-name
 mean_reward_lst = []
-for i in range(11):
+for i in range(5):
     data_set, mean_reward = data_creator.create_data_set(nr_episodes=30)
     # shuffle the data set
     data_set = data_set.sample(frac=1)
     # save the data set
-    data_set.to_pickle(f"data_set_{i * nr_training_rounds}_rounds.pkl")
+    data_set.to_pickle(f"data_sets/data_set_{i * nr_training_rounds}_rounds.pkl")
     mean_reward_lst.append(mean_reward)
     print(f"Mean reward for {i * nr_training_rounds} rounds: {mean_reward}")
     data_creator.train(_nr_training_rounds=nr_training_rounds)
