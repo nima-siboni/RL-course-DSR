@@ -1,6 +1,8 @@
 """This is a partial observable environment for the CartPole problem, where angular and posiional
 velocity are not observable. The state of the environment is the position of the cart and the angle.
 """
+from typing import Optional
+
 import numpy as np
 from gymnasium import spaces
 from gymnasium.envs.classic_control import CartPoleEnv
@@ -38,6 +40,16 @@ class POCartPoleEnv(CartPoleEnv):  # pylint: disable=invalid-name
         """
         state, r, terminated, truncated, info = super().step(action)
         return self._get_observation(state), r, terminated, truncated, info
+
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
+        """Reset the environment by calling the parent class reset method and then returning the
+        observable part of the state.
+
+        Returns:
+            The observable part of the state.
+        """
+        state, info = super().reset(seed=seed, options=options)
+        return self._get_observation(state), info
 
     @staticmethod
     def _get_observation(state: np.array) -> np.array:
