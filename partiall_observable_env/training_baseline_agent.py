@@ -15,7 +15,7 @@ def custom_env_creator(env_config):
     )
 
 
-NrTrainings = 100  # pylint: disable=invalid-name
+NrTrainings = 40  # pylint: disable=invalid-name
 register_env("POCartPole", custom_env_creator)
 
 
@@ -36,6 +36,6 @@ agent = (
 for i in range(NrTrainings):
     agent.train()
     reports = agent.train()
-    print(i, reports["episode_reward_mean"])
+    print(f"reward for training iteration {i}: {reports['episode_reward_mean']}")
 
 agent.save("pocartpole_agent")
