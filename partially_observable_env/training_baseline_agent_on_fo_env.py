@@ -1,7 +1,7 @@
 """Training an agent for a partially observable environment."""
 
-from partiall_observable_env.constants import NrTrainings
-from partiall_observable_env.custom_env_utils import fo_env_creator
+from constants import NrTrainings
+from custom_env_utils import fo_env_creator
 from ray.rllib.algorithms.dqn import DQNConfig
 from ray.tune import register_env
 
