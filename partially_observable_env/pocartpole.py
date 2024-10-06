@@ -5,7 +5,24 @@ from typing import Optional
 
 import numpy as np
 from gymnasium import spaces
-from gymnasium.envs.classic_control import CartPoleEnv
+from gymnasium.envs.classic_control import CartPoleEnv as CartPoleEnvOriginal
+from gymnasium.envs.registration import EnvSpec
+
+
+class CartPoleEnv(CartPoleEnvOriginal):
+    """Same as CartPoleEnv but with spec."""
+
+    def __init__(self, render_mode):
+        super().__init__(render_mode=render_mode)
+        self._spec = EnvSpec(id="CartPoleEnv")
+
+    @property
+    def spec(self):
+        """Return the spec of the environment.
+
+        Note: spec.maximum_nr_steps is needed by rllib to truncate the episode.
+        """
+        return self._spec
 
 
 class POCartPoleEnv(CartPoleEnv):  # pylint: disable=invalid-name

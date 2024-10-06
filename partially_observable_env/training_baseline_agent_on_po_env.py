@@ -1,23 +1,11 @@
 """Training an agent for a partially observable environment."""
 
-from gymnasium.wrappers import TimeLimit
+from partiall_observable_env.constants import NrTrainings
+from partiall_observable_env.custom_env_utils import po_env_creator
 from ray.rllib.algorithms.dqn import DQNConfig
 from ray.tune import register_env
 
-from partiall_observable_env.pocartpole import POCartPoleEnv
-
-
-def custom_env_creator(env_config):
-    """Create a custom environment with the given config."""
-    return TimeLimit(
-        env=POCartPoleEnv(render_mode=env_config["render_mode"]),
-        max_episode_steps=300,
-    )
-
-
-NrTrainings = 40  # pylint: disable=invalid-name
-register_env("POCartPole", custom_env_creator)
-
+register_env("POCartPole", po_env_creator)
 
 agent = (
     DQNConfig()
@@ -38,4 +26,4 @@ for i in range(NrTrainings):
     reports = agent.train()
     print(f"reward for training iteration {i}: {reports['episode_reward_mean']}")
 
-agent.save("pocartpole_agent")
+agent.save("checkpoints/po_cartpole_agent")

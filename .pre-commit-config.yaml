@@ -1,4 +1,4 @@
-exclude: test_uneven_maze.py
+exclude: ^(partially_observable_env/checkpoints|partially_observable_env/tensorboard_logs)/
 default_language_version:
   python: python3.10
 repos:
@@ -7,7 +7,6 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
-        exclude: ^(partially_observable_env/checkpoints|partially_observable_env/tensorboard_logs)/
       - id: check-case-conflict
       - id: check-symlinks
       - id: check-yaml
