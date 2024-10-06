@@ -7,7 +7,7 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
-        exclude: ^(partiall_observable_env/checkpoints|tensorboard_logs)/
+        exclude: ^(partially_observable_env/checkpoints|partially_observable_env/tensorboard_logs)/
           - dsd
       - id: check-case-conflict
       - id: check-symlinks
