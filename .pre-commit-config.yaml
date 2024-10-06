@@ -1,4 +1,4 @@
-exclude: test_uneven_maze.py
+exclude: ^(partially_observable_env/checkpoints|partially_observable_env/tensorboard_logs)/
 default_language_version:
   python: python3.10
 repos:
