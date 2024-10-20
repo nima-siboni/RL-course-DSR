@@ -1,9 +1,17 @@
 """Training an agent for a partially observable environment."""
-
-from partiall_observable_env.constants import NrTrainings
-from partiall_observable_env.custom_env_utils import po_env_creator
+from constants import NrTrainings
+from custom_env_utils import po_env_creator
 from ray.rllib.algorithms.dqn import DQNConfig
 from ray.tune import register_env
+from ray.tune.logger import UnifiedLogger
+
+
+def logger_creator(config: dict) -> UnifiedLogger:
+    """Create a Unified logger with a given logdir."""
+    return UnifiedLogger(
+        config=config, logdir="tensorboard_logs/DQN_POCartPole/", loggers=None
+    )
+
 
 register_env("POCartPole", po_env_creator)
 
@@ -18,12 +26,15 @@ agent = (
         evaluation_interval=1,
         evaluation_duration_unit="episodes",
     )
-    .build()
+    .build(logger_creator=logger_creator)
 )
 
 for i in range(NrTrainings):
     agent.train()
     reports = agent.train()
-    print(f"reward for training iteration {i}: {reports['episode_reward_mean']}")
+    print(
+        f"reward for training iteration {i}: "
+        f"{agent.evaluate()['env_runners']['episode_reward_mean']}"
+    )
 
 agent.save("checkpoints/po_cartpole_agent")
