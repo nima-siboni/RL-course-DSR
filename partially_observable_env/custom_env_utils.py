@@ -1,6 +1,6 @@
 """Utilities for registering custom envs by RLlib."""
 from constants import MAX_EPISODE_STEPS
-from gymnasium.wrappers import OrderEnforcing, TimeLimit
+from gymnasium.wrappers import FlattenObservation, FrameStack, OrderEnforcing, TimeLimit
 from pocartpole import CartPoleEnv, POCartPoleEnv
 
 
@@ -23,5 +23,20 @@ def po_env_creator(env_config):
         env=TimeLimit(
             env=POCartPoleEnv(render_mode=env_config["render_mode"]),
             max_episode_steps=MAX_EPISODE_STEPS,
+        )
+    )
+
+
+def stacked_po_env_creator(env_config):
+    """Create a custom environment (partially observable) with the given config."""
+    return FlattenObservation(
+        env=FrameStack(
+            env=OrderEnforcing(
+                env=TimeLimit(
+                    env=POCartPoleEnv(render_mode=env_config["render_mode"]),
+                    max_episode_steps=MAX_EPISODE_STEPS,
+                )
+            ),
+            num_stack=2,
         )
     )
