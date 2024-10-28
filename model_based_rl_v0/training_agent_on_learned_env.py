@@ -25,7 +25,7 @@ config = (
         env="LearnedCartPole",
         env_config={
             "render_mode": "rgb_array",
-            "model_path": ModelPath,
+            "ModelPath": ModelPath,
         },
     )
 )
