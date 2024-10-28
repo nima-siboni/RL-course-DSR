@@ -1,21 +1,27 @@
-"""A class for creating a dataset from episodes interations of (RL) agents with CartPole-v1
-environment."""
+"""Creating a data set for model-based reinforcement learning.
+
+Here the idea is to create three different datasets for cartpole environment:
+1. A data set created from the interactions of a random data_creator with the environment.
+2. A data set created from the interactions of an data_creator which is trained for 10 episodes with
+ env.
+3. A data set created from the interactions of an data_creator which is trained for 100 episodes
+with env.
+"""
 from typing import Tuple
 
+# 0. Import necessary libraries
+import gymnasium as gym
 import pandas as pd
-from ray.rllib.algorithms import DQNConfig
-from ray.rllib.algorithms.algorithm_config import gym
+from matplotlib import pyplot as plt
+from ray.rllib.algorithms.dqn.dqn import DQNConfig
 from tqdm import tqdm
 
 
+# 1. Create a class which has an data_creator that can be trained for a number of training episodes.
 class DataCreator:
-    """A class for creating datasets of different qualities from interaction of RL agents with
-    CartPole-v1 environment. The collected data captures a complete transition:
-    s, a, s', r, terminated, trunctated, info.
-
-    Note: RL agent(s) which interact with the environment are trained (on CartPole-v1) for different
-    number of iterations; This is to mimick different level of expertise, i.e. larger number of
-    trainings means higher levels of expertise in controlling the environmnet.
+    """A dataclass with a RL data_creator and a gym environment. The data_creator can be trained for
+    a number of training episodes, and then it can create a data set from the interactions with the
+    environment.
     """
 
     def __init__(self, env_name: str = "CartPole-v1"):
@@ -36,7 +42,7 @@ class DataCreator:
         for _ in range(_nr_training_rounds):
             self.agent.train()
 
-    def create_data_set(self, nr_episodes: int) -> Tuple[pd.DataFrame, dict]:
+    def create_data_set(self, nr_episodes: int) -> Tuple[pd.DataFrame, float]:
         """Create a panda dataframe from the interactions of the data_creator with the environment.
 
         The data set has the following columns:
@@ -46,15 +52,6 @@ class DataCreator:
         - next_state: The next state of the environment.
         - terminated: Whether the episode is terminated.
         - truncated: Whether the episode is truncated.
-
-        Args:
-            nr_episodes: the number of episodes that are collected for the dataset.
-
-        Returns:
-            data (pd.DataFrame): A panda dataframe containing the interactions of the agent with the
-             env.
-            misc (dict): a dictionary containing some statistics of the gathered dataset.
-
         """
         _data_set = []
         sum_reward = 0
@@ -77,4 +74,28 @@ class DataCreator:
                 done = terminated or truncated
                 sum_reward += reward
 
-        return pd.DataFrame(_data_set), {"average_reward": sum_reward / nr_episodes}
+        return pd.DataFrame(_data_set), sum_reward / nr_episodes
+
+
+# 2. Create an data_creator and train it for 0 episodes.
+data_creator = DataCreator()  # pylint: disable=invalid-name
+nr_training_rounds = 10  # pylint: disable=invalid-name
+mean_reward_lst = []
+for i in range(5):
+    data_set, mean_reward = data_creator.create_data_set(nr_episodes=30)
+    # shuffle the data set
+    data_set = data_set.sample(frac=1)
+    # save the data set
+    data_set.to_pickle(f"data_sets/data_set_{i * nr_training_rounds}_rounds.pkl")
+    mean_reward_lst.append(mean_reward)
+    print(f"Mean reward for {i * nr_training_rounds} rounds: {mean_reward}")
+    data_creator.train(_nr_training_rounds=nr_training_rounds)
+
+# 3. Plot and save the mean rewards for further analysis
+
+plt.plot(mean_reward_lst)
+plt.xlabel("Training rounds")
+plt.ylabel("Mean reward")
+plt.title("Mean reward vs. training rounds")
+plt.savefig("mean_reward_vs_training_rounds.png")
+plt.close()
