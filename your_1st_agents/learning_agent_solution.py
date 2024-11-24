@@ -55,9 +55,8 @@ agent = config.build()
 nr_trainings = 100  # pylint: disable=invalid-name
 mean_rewards = []
 for _ in range(nr_trainings):
-    reports = agent.train()
-    print(_, reports["episode_reward_mean"])
-    mean_rewards.append(reports["episode_reward_mean"])
+    agent.train()
+    print("total reward:", agent.evaluate()["env_runners"]["episode_reward_mean"])
 
 # plot the mean rewards
 plt.plot(mean_rewards)
