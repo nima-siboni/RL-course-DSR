@@ -17,6 +17,7 @@ dependencies = [
     "matplotlib==3.6.3",
     "numpy==1.26.4",
     "pandas~=2.2.2",
+    "pre-commit>=4.3.0",
     "pygame==2.5.2",
     "pyglet==2.0.14",
     "pylint==3.1.0",
@@ -34,14 +35,10 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["rlcomponents*", "uneven_maze*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.md", "*.txt", "*.py"]
-
-# Local packages for editable install
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["rlcomponents*", "uneven_maze*"]
 
 # Development tools configuration
 [tool.pylint.messages_control]
