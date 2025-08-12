@@ -2,20 +2,20 @@
 Here are the exercises for the first/second session of our RL course.
 
 ## Requirements
-Create a virtual environment, with python or conda, e.g.
-```buildoutcfg
-conda create -n rl python=3.10
-conda activate rl
+Create a virtual environment using uv (recommended) or python, e.g.
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create and activate a virtual environment
+uv venv
+source .venv/bin/activate  # On macOS/Linux
+# or
+.venv\Scripts\activate     # On Windows
 ```
-Then, update your pip!
-```buildoutcfg
-pip install --upgrade pip
-```
-Clone the repository and get into RL-course-DSR. Now you can install the required
-packages which are listed in ```requirements.txt```, for example
-by
-```buildoutcfg
-pip install -r requirements.txt
+Then install the required packages:
+```bash
+uv pip install -r requirements.txt
 ```
 
 ## Presentation
