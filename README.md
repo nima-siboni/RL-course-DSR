@@ -15,7 +15,13 @@ source .venv/bin/activate  # On macOS/Linux
 ```
 Then install the required packages:
 ```bash
-uv pip install -r requirements.txt
+uv pip install -e .
+```
+
+# Development Setup
+For development with additional tools like pre-commit:
+```bash
+uv pip install -e ".[dev]"
 ```
 
 ## Presentation
