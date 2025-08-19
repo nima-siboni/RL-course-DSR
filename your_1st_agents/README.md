@@ -60,7 +60,3 @@ Tips 💡
 - [ ] You can run and repeat episodes, logging total rewards
 - [ ] You configured and trained a learning agent
 - [ ] You compared performance: random vs. trained
-
-## Where to go next ➡️
-- Explore envs and APIs: `interaction_with_env/`
-- Implement core algorithms: `Q_learning/`, `Monte_Carlo_Control/`
