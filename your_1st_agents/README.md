@@ -27,7 +27,6 @@ You'll do:
 
 Start here:
 - Local guide: [random_agent.md](./random_agent.md)
-- Colab: [Random Agent Notebook](https://colab.research.google.com/drive/1_OZ-qnZO2hYd12HGp_urXZIBQo0cHq8M?authuser=1#scrollTo=MWr_fBo5WT59)
 
 Tips 💡
 - Use `env.action_space.sample()` to get a valid random action
@@ -47,7 +46,6 @@ You'll do:
 Start here:
 - Local guide: [learning_agent.md](./learning_agent.md)
 - [RLlib algorithms reference](https://docs.ray.io/en/latest/rllib/rllib-algorithms.html)
-- Colab: [Learning Agent Notebook](https://colab.research.google.com/drive/1xFcXDlDce1_c4VHtGV3d06lOdvi6RGIt?authuser=1#scrollTo=rktqiU2Ec18P)
 
 Tips 💡
 - Keep train/eval environments aligned
