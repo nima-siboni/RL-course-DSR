@@ -7,10 +7,6 @@ Build a simple baseline that samples random actions and interacts with the envir
 - [ ] Step through episodes and accumulate rewards
 - [ ] Repeat episodes and compare returns
 
-## Prerequisites ✅
-- Python 3.10+
-- `gymnasium` installed
-
 ---
 
 ## 0 — Create an environment 🚀
@@ -43,7 +39,7 @@ terminated = truncated = False
 total_reward = 0.0
 
 while not (terminated or truncated):
-    action = env.action_space.sample()
+    action = ... # implement a random action
     obs, reward, terminated, truncated, info = env.step(action)
     total_reward += reward
 
@@ -60,7 +56,8 @@ for _ in range(10):
     terminated = truncated = False
     total_reward = 0.0
     while not (terminated or truncated):
-        obs, reward, terminated, truncated, info = env.step(env.action_space.sample())
+        action = ... # implement a random action
+        obs, reward, terminated, truncated, info = env.step(action)
         total_reward += reward
     returns.append(total_reward)
 
