@@ -1,6 +1,5 @@
 """Your first learning agent - DQN on CartPole-v1 using RLlib."""
 import gymnasium as gym
-from matplotlib import pyplot as plt
 from plot_util import visualize_env
 from ray.rllib.algorithms.dqn import DQNConfig
 import torch
