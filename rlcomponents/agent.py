@@ -5,7 +5,7 @@ A class for the agent
 import copy
 
 import numpy as np
-from policy import Policy
+from rlcomponents.policy import Policy
 from tqdm import tqdm
 
 

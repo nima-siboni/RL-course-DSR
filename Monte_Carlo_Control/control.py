@@ -4,9 +4,9 @@ A Monte Carlo control algorithm for the uneven terrain problem.
 import copy
 
 import matplotlib
-from agent import Agent
-from policy import Policy
-from rl_utils import calculate_epsilon
+from rlcomponents.agent import Agent
+from rlcomponents.policy import Policy
+from rlcomponents.rl_utils import calculate_epsilon
 
 from uneven_maze import UnevenMaze, sample_terrain_function
 
